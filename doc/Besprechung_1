@@ -1,0 +1,13 @@
+04.10.19 Projektmeeting 1
+-Allgemein Vorgehen: Project Scope definieren. Kann noch während Projekt angepasst werden. Aber auf Stufe Vision Klarheit schaffen.
+Systemabgrenzung: 
+Verfeinerung Use-Cases: 
+-Produktvision: OK
+-Projektzielsetzung, Ausgangslage: Zustand neutral beschreiben, Probleme im Ist-Zustand beschreiben -> Chancen für das Projekt definieren. Was ist heute? Was ist der Anstoss dieses Projekt aufzusetzten.
+Was fehlt heute? Ohne Ziele zu beschreiben.
+-Projektziele: Falsche Priorisierung -> Fokus auf Produkt, nicht auf Betreuer/Entwickler. Bei Kunden, nur ein Ziel. (3-4 Ziele, messbar, nutzenorientiert)
+Priorisierung: Technische Umsetzung -> Konkreter (iteratives Implementieren)
+-Systemabgrenzung: Prozessumfeld, mit Begründung streichen. Evtl kurze Begründung, dass nur Spiel im Vordergrund steht und nicht verwaltet/vermarktet wird.
+Systemumfeld: Falls gegeneinander gespeilt wird beschreiben. Sonst nur Spieler und System.
+Use-Cases: Titel soweit ausreichen. -> Beschreibung vertiefen. Wenn Skizze, dann pro Use-Case und nicht eine Skizze mit mehreren Use-Cases. User-Stories löschen (nicht doppelt).
+Datenmodell: Welche Spielobjekte gibt es? Wenn es geht mit Relationen. In Terminologie von Unity.
