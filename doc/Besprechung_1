@@ -13,3 +13,17 @@ Use-Cases: Titel soweit ausreichen. -> Beschreibung vertiefen. Wenn Skizze, dann
 Datenmodell: Welche Spielobjekte gibt es? Wenn es geht mit Relationen. In Terminologie von Unity.
 
 Bis Mittwoch 9.10. Systemabgrenzung + UC
+(Ueli Notizen):
+Dokument:
+GUt untergŵegs
+1) Or^Projektumfang muss klar sein
+2) Projektvision -> ok
+3) Ausganglage -> Anstoss für das Projekt ncohmal beschreiben.
+4) Projektziele -> Falsche Reihenfolge der Stakeholder folsch priosierung, Spieler zuerst und ausführlicher (3 nutzenorientiert).
+5) Iterative Implementierung.
+6) Systemabgrenzung -> Nicht anwendbar (Mit Begründung).
+7) Use Cases -> Verfeinern
+8) Unity Spielobjekte Defenieren (Datenmodell) Hauptwörter sollten  im Datenmodell vorhanden.
+
+Bis Mittwochabend -> Systemabgranzung Usecasesverfeinern
+
