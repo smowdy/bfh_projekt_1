@@ -11,3 +11,5 @@ Priorisierung: Technische Umsetzung -> Konkreter (iteratives Implementieren)
 Systemumfeld: Falls gegeneinander gespeilt wird beschreiben. Sonst nur Spieler und System.
 Use-Cases: Titel soweit ausreichen. -> Beschreibung vertiefen. Wenn Skizze, dann pro Use-Case und nicht eine Skizze mit mehreren Use-Cases. User-Stories löschen (nicht doppelt).
 Datenmodell: Welche Spielobjekte gibt es? Wenn es geht mit Relationen. In Terminologie von Unity.
+
+Bis Mittwoch 9.10. Systemabgrenzung + UC
