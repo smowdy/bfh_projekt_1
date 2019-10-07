@@ -1,6 +1,6 @@
 @startuml
 
-abstract Class MonoObject
+abstract Class MonoBehaviour
 
 Class SpaceShip
 
@@ -14,11 +14,15 @@ Class Obstactle
 
 Class Objective
 
+Class MainUI
+
 PlayerShip -up-|> SpaceShip
 EnemyShip -up-|> SpaceShip
-SpaceShip -up-|> MonoObject
-Objective -up-|> MonoObject
-Weapon -up-|> MonoObject
-Obstactle -up-|> MonoObject
+SpaceShip -up-|> MonoBehaviour
+SpaceShip -right- Weapon
+Objective -up-|> MonoBehaviour
+Weapon -up-|> MonoBehaviour
+Obstactle -up-|> MonoBehaviour
+MainUI -up-|> MonoBehaviour
 
 @enduml
