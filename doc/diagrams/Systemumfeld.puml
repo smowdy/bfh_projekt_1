@@ -1,0 +1,15 @@
+# Systemumfeld
+
+@startuml
+
+left to right direction
+actor Spieler
+
+rectangle ArcadeSpaceShooter
+rectangle Computer
+
+Spieler --> ArcadeSpaceShooter
+Computer --> ArcadeSpaceShooter
+
+
+@enduml
