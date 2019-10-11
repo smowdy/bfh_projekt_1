@@ -1,0 +1,17 @@
+Besprechung 2, 11.10.19
+
+Allgemein: Guter Stand, Titelseite: Version und Datum nachtragen.
+Vision/Ziele: OK
+Use-Cases: OK fast alles.
+Datenmodell fehlt.
+Quellen und Vorgehen: Orientierung an bestehenden Arcadespiel, Inspirationsquelle, Spielregeln selber entworfen. (Grundsätzlich muss das nicht begründet werden)
+Kontextdiagramm Systemumfeld: Computer ersatzlos streichen.
+UC1.3: Maus beschriften
+UC2.5: Beschreiben wie Spieler den Level startet. (Bildschirm leer, Button 'Start',...), Dynamische Generierung besser beschreiben. V.A. unterschied zu 'normalem' Level
+UC3.1: Use-Case oder Dauerfeature von GUI? Braucht es das? Veränderung des Lebensbalken verändert sich in anderen Use Cases. Evtl. Trigger umformulieren (Spieler nimmt schaden). Anpassen des Balkens ist eher Use-Case
+UC3.2: Bezug zu UC 2.3?, Dito bei UC3.3
+
+-Planung: Bis nächste Woche Spezifikation überarbeiten. Planung überlegen. Entwicklungsumgebung aufbauen.
+
+Weiter:
+-Tasks definieren.
