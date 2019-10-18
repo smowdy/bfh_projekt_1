@@ -1,0 +1,8 @@
+So also!
+Datenmodell: Nachvollziehbar. Kurzbeschreibung mit Keys. Nicht offensichtliche Sachen wie MonoBehaviour: Kurzbeschreibung in einem Satz.
+In UseCases und Datenmodell dieselben Namen verwenden (Raumschiff -SpaceShip, Waffen - Weapon) --> Gleiche Sprache verwenden. Egal ob Englisch oder Deutsch.
+Auch per Mapping in Tabelle möglich.
+Formal: Seitennummerierung hinzufügen. Titelbild?
+
+Fragen zum weiteren Vorgehen:
+ - Nächste Woche: Planung inhaltlich definiern/besprechen. --> Was machen wir in Sprint 1 / Sprint 2.
