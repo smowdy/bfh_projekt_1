@@ -1,28 +1,38 @@
 @startuml
 
-abstract Class MonoBehaviour
+package "Unity Objects" <<Rectangle>> {
+    hide members
+    Class Player
+    Class Enemy
+    Class Weapon
+    Class Asteroid
+    Class Objective
+    Class UI
+}
 
-Class SpaceShip
+package "Behaviours and Controllers" <<Rectangle>> {
+    hide members
+    abstract Class MonoBehaviour
+    Class SpaceShip
+    Class PlayerController
+    Class EnemyController
+    Class WeaponController
+    Class ObjectiveController
+    Class UiController
+}
 
-Class PlayerShip
-
-Class EnemyShip
-
-Class Weapon
-
-Class Obstactle
-
-Class Objective
-
-Class MainUI
-
-PlayerShip -up-|> SpaceShip
-EnemyShip -up-|> SpaceShip
+PlayerController -up-|> SpaceShip
+EnemyController -up-|> SpaceShip
 SpaceShip -up-|> MonoBehaviour
-SpaceShip -right- Weapon
-Objective -up-|> MonoBehaviour
-Weapon -up-|> MonoBehaviour
-Obstactle -up-|> MonoBehaviour
-MainUI -up-|> MonoBehaviour
+SpaceShip -right- WeaponController
+ObjectiveController -up-|> MonoBehaviour
+WeaponController -up-|> MonoBehaviour
+UiController -up-|> MonoBehaviour
+
+Player *-up- PlayerController
+Enemy *-up- EnemyController
+Weapon *-up- WeaponController
+Objective *-up- ObjectiveController
+UI *-up- UiController
 
 @enduml

@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+Actor System
+Actor Player
+
+(Level starten)
+(Spielwelt dynamisch generieren)
+(mit Waffen zielen)..>(Level starten):include
+(mit Waffen feuern)..>(Level starten):include
+(Fähigkeiten einsetzen)..>(Level starten):include
+(Feindeinheiten bekämpfen)..>(Level starten):include
+(Verbesserungen kauffen)..>(Level starten):include
+(Raumschiff bewegen)
+(Raumschiff bewegen).>(Level starten):include
+(Ziel erreichen)..>(Raumschiff bewegen):include
+(Asteroiden ausweichen)..>(Raumschiff bewegen):include
+(Richtung einsehen).>(Ziel erreichen):extends
+(Feindeinheiten bekämpfen)..>(mit Waffen zielen):include
+(Feindeinheiten bekämpfen)..>(mit Waffen feuern):include
+(Raumschiff nimmt Schaden)<.(Kann zersört werden):extends
+(Asteroiden ausweichen)<..(Raumschiff nimmt Schaden):extends
+(Feindeinheiten bekämpfen)<..(Raumschiff nimmt Schaden):extends
+(Feinde nehmen Schaden).>(Feindeinheiten bekämpfen):include
+(Feinde hinterlassen Währung).>(Feindeinheiten bekämpfen):include
+
+Player -- (Feindeinheiten bekämpfen)
+Player -- (Asteroiden ausweichen)
+Player -- (Ziel erreichen)
+Player -- (Fähigkeiten einsetzen)
+Player -- (Spielwelt dynamisch generieren)
+Player -- (Verbesserungen kauffen)
+
+(Level starten) -- System
+
+@enduml
