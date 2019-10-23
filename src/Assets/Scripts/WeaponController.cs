@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+
+   public float TurnSpeed = 1f;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         Aim();
     }
@@ -24,9 +27,9 @@ public class WeaponController : MonoBehaviour
         if (plane.Raycast(ray, out distance))
         {
             Vector3 targetPosition = ray.GetPoint(distance);
-            Vector3 direction = targetPosition - transform.position;
-            float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            transform.eulerAngles = new Vector3(0, rotation, 0);
+            Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+            //transform.rotation = targetRotation;
         }
     }
 }
