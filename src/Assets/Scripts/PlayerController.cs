@@ -2,15 +2,9 @@
 
 public class PlayerController : MonoBehaviour
 {
-    Transform myTransform;
-
     [SerializeField]float movementSpeed = 32f;
-    [SerializeField]float turnSpeed = 40f;
+    [SerializeField]float turnSpeed = 80f;
 
-    private void Start()
-    {
-        myTransform = transform;
-    }
     // Update is called once per frame
     void Update()
     {
@@ -21,12 +15,10 @@ public class PlayerController : MonoBehaviour
     void Turn()
     {
         float yaw = turnSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
-
-        myTransform.Rotate(0, yaw, 0);
+        transform.Rotate(0, yaw, 0);
     }
+
     void Thrust() {
-        myTransform.position += transform.forward * movementSpeed * Time.deltaTime * Input.GetAxis("Vertical");
-
+        transform.position += transform.forward * movementSpeed * Time.deltaTime * Input.GetAxis("Vertical");
     }
-
 }
