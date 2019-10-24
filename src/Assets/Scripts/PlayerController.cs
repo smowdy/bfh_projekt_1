@@ -2,8 +2,6 @@
 
 public class PlayerController : MonoBehaviour
 {
-    Transform myTransform;
-
     [SerializeField]float movementSpeed = 32f;
     [SerializeField]float turnSpeed = 80f;
 
