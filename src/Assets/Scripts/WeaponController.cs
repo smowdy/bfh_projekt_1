@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float turnSpeed = 1f;
 
-   public float TurnSpeed = 1f;
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    public void Update()
+    private void Update()
     {
         Aim();
     }
@@ -28,7 +21,7 @@ public class WeaponController : MonoBehaviour
         {
             Vector3 targetPosition = ray.GetPoint(distance);
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
             //transform.rotation = targetRotation;
         }
     }

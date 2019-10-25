@@ -1,24 +1,20 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SpaceShipController
 {
-    [SerializeField]float movementSpeed = 32f;
-    [SerializeField]float turnSpeed = 80f;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Turn();
         Thrust();
     }
 
-    void Turn()
+    private void Turn()
     {
-        float yaw = turnSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
-        transform.Rotate(0, yaw, 0);
+        Turn(Input.GetAxis("Horizontal"));
     }
 
-    void Thrust() {
-        transform.position += transform.forward * movementSpeed * Time.deltaTime * Input.GetAxis("Vertical");
+    private void Thrust() {
+        Thrust(Input.GetAxis("Vertical"));
     }
 }
