@@ -9,6 +9,10 @@ package "Unity Objects" <<Rectangle>> {
     Class Asteroid
     Class Objective
     Class UI
+
+    note bottom of Player : Unique, contains Camera
+    note bottom of UI : Unique
+    note bottom of Objective : Unique
 }
 
 package "Behaviours and Controllers" <<Rectangle>> {
