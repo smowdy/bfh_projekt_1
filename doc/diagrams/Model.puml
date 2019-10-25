@@ -5,34 +5,52 @@ package "Unity Objects" <<Rectangle>> {
     Class Player
     Class Enemy
     Class Weapon
+    Class Projectile
     Class Asteroid
     Class Objective
     Class UI
 }
 
 package "Behaviours and Controllers" <<Rectangle>> {
-    hide members
+    hide methods
     abstract Class MonoBehaviour
-    Class SpaceShip
+    Class DestructibleObjectConroller{
+        - int MaxHealthpoints
+        - int Healthpoints
+    }
+    Class SpaceShipController{
+        - float MaxSpeed
+        - float TurnSpeed
+    }
     Class PlayerController
     Class EnemyController
-    Class WeaponController
+    Class WeaponController{
+        - GameObject ProjectilePrefab
+    }
+    Class ProjectileController{
+        - int Damage
+    }
     Class ObjectiveController
     Class UiController
 }
 
-PlayerController -up-|> SpaceShip
-EnemyController -up-|> SpaceShip
-SpaceShip -up-|> MonoBehaviour
-SpaceShip -right- WeaponController
+PlayerController -up-|> SpaceShipController
+EnemyController -up-|> SpaceShipController
+SpaceShipController -up-|> DestructibleObjectConroller
+SpaceShipController -- WeaponController
 ObjectiveController -up-|> MonoBehaviour
 WeaponController -up-|> MonoBehaviour
+ProjectileController -up-|> MonoBehaviour
 UiController -up-|> MonoBehaviour
+DestructibleObjectConroller -up-|> MonoBehaviour
 
 Player *-up- PlayerController
 Enemy *-up- EnemyController
 Weapon *-up- WeaponController
+Projectile *-up- ProjectileController
+WeaponController *-up- Projectile
 Objective *-up- ObjectiveController
 UI *-up- UiController
+Asteroid *-up- DestructibleObjectConroller
 
 @enduml
