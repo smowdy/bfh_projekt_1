@@ -2,31 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : SpaceShipController
 {
-    float movementSpeed = 5f;
-    float turnSpeed = 10f;
-    float turnDirection = 1;
+    private float turnDirection = 1;
 
     private void Start()
     {
         InvokeRepeating("SetRandomDirection", 0.1f, 3.0f);
     }
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         Turn();
         Thrust();
     }
 
-    void Turn()
+    private void Turn()
     {
-        float yaw = turnSpeed * Time.deltaTime * turnDirection;
-        transform.Rotate(0, yaw, 0);
+        Turn(turnDirection);
     }
-    void Thrust()
+
+    private void Thrust()
     {
-        transform.position += transform.forward * movementSpeed * Time.deltaTime;
+        Thrust(1);
     }
 
     private void SetRandomDirection()
