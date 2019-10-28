@@ -5,13 +5,7 @@ using UnityEngine;
 public class UiController : MonoBehaviour
 {
 
-    public GameObject Crosshair;
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject Crosshair;
 
     // Update is called once per frame
     public void Update()
