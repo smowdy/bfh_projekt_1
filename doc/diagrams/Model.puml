@@ -1,24 +1,25 @@
 @startuml
 
-package "Unity Objects" <<Rectangle>> {
+package "Unity Scenes" <<Rectangle>>{
     hide members
+    Class MainScene
+}
+
+package "Unity GameObjects" <<Rectangle>> {
+    hide members
+    Class Weapon
     Class Player
     Class Enemy
-    Class Weapon
     Class Projectile
     Class Asteroid
     Class Objective
     Class UI
-
-    note bottom of Player : Unique, contains Camera
-    note bottom of UI : Unique
-    note bottom of Objective : Unique
 }
 
 package "Behaviours and Controllers" <<Rectangle>> {
     hide methods
     abstract Class MonoBehaviour
-    Class DestructibleObjectConroller{
+    Class DestructibleObjectController{
         - int MaxHealthpoints
         - int Healthpoints
     }
@@ -32,7 +33,8 @@ package "Behaviours and Controllers" <<Rectangle>> {
         - GameObject ProjectilePrefab
     }
     Class ProjectileController{
-        - int Damage
+        - float Damage
+        - float Speed
     }
     Class ObjectiveController
     Class UiController
@@ -40,14 +42,14 @@ package "Behaviours and Controllers" <<Rectangle>> {
 
 PlayerController -up-|> SpaceShipController
 EnemyController -up-|> SpaceShipController
-SpaceShipController -up-|> DestructibleObjectConroller
-SpaceShipController -- WeaponController
+SpaceShipController -up-|> DestructibleObjectController
 ObjectiveController -up-|> MonoBehaviour
 WeaponController -up-|> MonoBehaviour
 ProjectileController -up-|> MonoBehaviour
 UiController -up-|> MonoBehaviour
-DestructibleObjectConroller -up-|> MonoBehaviour
+DestructibleObjectController -up-|> MonoBehaviour
 
+Asteroid *-up- DestructibleObjectController
 Player *-up- PlayerController
 Enemy *-up- EnemyController
 Weapon *-up- WeaponController
@@ -55,6 +57,13 @@ Projectile *-up- ProjectileController
 WeaponController *-up- Projectile
 Objective *-up- ObjectiveController
 UI *-up- UiController
-Asteroid *-up- DestructibleObjectConroller
+
+MainScene -up- "1" Player
+MainScene -up- "0...n" Enemy
+MainScene -up- "0...n" Weapon
+MainScene -up- "0...n" Projectile
+MainScene -up- "0...n" Asteroid
+MainScene -up- "1" Objective
+MainScene -up- "1" UI
 
 @enduml
