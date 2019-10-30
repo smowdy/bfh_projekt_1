@@ -11,17 +11,17 @@ public class WeaponController : MonoBehaviour
     private Transform[] projectileSpawns;
 
     [SerializeField]
-    private Transform partenTransform;
+    private Transform parentTransform;
 
     [SerializeField]
     private float shotsPerSecond = 10f;
 
     [SerializeField]
-    private float turnSpeed = 1f;
+    private float turnDegreePerSecond = 360f;
 
     [SerializeField]
     [Range(0, 360)]
-    private float maxTurnAngle = 360f;
+    private float maxTurnDegree = 360f;
 
     [SerializeField]
     [Range(0, 360)]
@@ -41,17 +41,24 @@ public class WeaponController : MonoBehaviour
     {
         lastAimedDirection = direction;
 
-        if (maxTurnAngle == 0) { return; }
+        if (maxTurnDegree == 0) { return; }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        Vector3 targetRotationVector = targetRotation.eulerAngles;
 
-        if (maxTurnAngle != 360)
+        if(maxTurnDegree == 360)
         {
-            targetRotation = GetLimitedRotation(targetRotation);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnDegreePerSecond * Time.deltaTime);
+            return;
         }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        targetRotation = GetLimitedRotation(targetRotation);
+        if(Quaternion.Angle(transform.rotation, GetInitialRelativeRotation()) + Quaternion.Angle(transform.rotation, targetRotation) > 180)
+        {
+            targetRotation = GetInitialRelativeRotation();
+        }
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnDegreePerSecond * Time.deltaTime);
+
     }
 
     protected void TryShoot()
@@ -66,12 +73,20 @@ public class WeaponController : MonoBehaviour
 
     private Quaternion GetLimitedRotation(Quaternion targetRotation)
     {
-        Quaternion initialRelativeRotation = Quaternion.Euler(
-            partenTransform.rotation.eulerAngles.x + initialRotation.eulerAngles.x,
-            partenTransform.rotation.eulerAngles.y + initialRotation.eulerAngles.y,
-            partenTransform.rotation.eulerAngles.z + initialRotation.eulerAngles.z
+        return Quaternion.RotateTowards(GetInitialRelativeRotation(), targetRotation, maxTurnDegree / 2);
+    }
+
+    /// <summary>
+    /// Returns a Quaternion representing the initial rotation relative to woldspace
+    /// </summary>
+    /// <returns>Quaternion</returns>
+    private Quaternion GetInitialRelativeRotation()
+    {
+        return Quaternion.Euler(
+            parentTransform.rotation.eulerAngles.x + initialRotation.eulerAngles.x,
+            parentTransform.rotation.eulerAngles.y + initialRotation.eulerAngles.y,
+            parentTransform.rotation.eulerAngles.z + initialRotation.eulerAngles.z
         );
-        return Quaternion.RotateTowards(initialRelativeRotation, targetRotation, maxTurnAngle / 2);
     }
 
     private bool CanShoot()

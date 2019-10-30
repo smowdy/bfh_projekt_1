@@ -709,10 +709,10 @@ MonoBehaviour:
   projectileSpawns:
   - {fileID: 1340539560}
   - {fileID: 81897793}
-  partenTransform: {fileID: 528282784}
+  parentTransform: {fileID: 528282784}
   shotsPerSecond: 10
-  turnSpeed: 10
-  maxTurnAngle: 280
+  turnDegreePerSecond: 360
+  maxTurnDegree: 280
   maxAngleDeltaToShoot: 5
 --- !u!1 &528282782
 GameObject:
