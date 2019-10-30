@@ -4,51 +4,51 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-   [SerializeField] private GameObject projectilePrefab;
-   [SerializeField] private GameObject[] projectileSpawns;
-   [SerializeField] private float shotsPerSecond = 0.1f;
-   [SerializeField] private float turnSpeed = 1f;
+    [SerializeField]
+    private GameObject projectilePrefab;
 
-   private float nextShotAt = 0f;
-   private int lastUsedProjectileSpawn = 0;
+    [SerializeField]
+    private Transform[] projectileSpawns;
 
-   private void Update()
-   {
-      Aim();
-      Shoot();
-   }
+    [SerializeField]
+    private float shotsPerSecond = 10f;
 
-   private void Aim()
-   {
-      Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-      Plane plane = new Plane(transform.up, transform.position);
-      float distance;
-      if (plane.Raycast(ray, out distance))
-      {
-         Vector3 targetPosition = ray.GetPoint(distance);
-         Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-         //transform.rotation = targetRotation;
-      }
-   }
+    [SerializeField]
+    private float turnSpeed = 1f;
 
-   private void Shoot()
-   {
-      if (!(Input.GetAxis("Fire1") > 0) ||
-         Time.time < nextShotAt)
-      {
-         return;
-      }
+    private float nextShotAt = 0f;
+    private int lastUsedProjectileSpawn = 0;
+    private Vector3 lastAimedDirection = Vector3.zero;
+    private float initialAimAngle = 0;
 
-      nextShotAt = Time.time + shotsPerSecond;
+    protected void Aim(Vector3 direction)
+    {
+        lastAimedDirection = direction;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        //transform.rotation = targetRotation;
+    }
 
-      GameObject spawn = GetNextProjectileSpawn(lastUsedProjectileSpawn);
-      Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
-   }
+    protected void TryShoot()
+    {
+        if (!CanShoot()) { return; }
 
-   private GameObject GetNextProjectileSpawn(int lastUsedProjectileSpawn)
-   {
-      int nextShipBayToSpawnFrom = (lastUsedProjectileSpawn + 1) % projectileSpawns.Length;
-      return projectileSpawns[nextShipBayToSpawnFrom];
-   }
+        nextShotAt = Time.time + 1 / shotsPerSecond;
+
+        Transform spawn = GetNextProjectileSpawn();
+        Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
+    }
+
+    private bool CanShoot()
+    {
+        if (Time.time < nextShotAt) { return false; }
+        return true;
+    }
+
+    private Transform GetNextProjectileSpawn()
+    {
+        int nextSpawnIndex = (lastUsedProjectileSpawn + 1) % projectileSpawns.Length;
+        lastUsedProjectileSpawn = nextSpawnIndex;
+        return projectileSpawns[nextSpawnIndex];
+    }
 }

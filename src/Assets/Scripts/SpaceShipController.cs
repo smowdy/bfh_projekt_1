@@ -5,12 +5,15 @@ using UnityEngine;
 public class SpaceShipController : DestructibleObjectController
 {
 
-    [SerializeField] protected float maxSpeed = 5f;
-    [SerializeField] protected float turnSpeed = 20f;
+    [SerializeField]
+    protected float maxSpeed = 5f;
+
+    [SerializeField]
+    protected float turnSpeed = 20f;
 
     //private void Start()
     //{
-        
+
     //}
 
     //private void Update()

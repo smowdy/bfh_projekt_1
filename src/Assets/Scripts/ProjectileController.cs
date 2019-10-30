@@ -4,30 +4,36 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-   [SerializeField] private float speed = 10f;
-   [SerializeField] private float damage = 10f;
-   [SerializeField] private float lifetimeInSec = 2f;
+    [SerializeField]
+    private float speed = 50f;
 
-   private float _launchTime;
+    [SerializeField]
+    private float damage = 10f;
 
-   private void Start()
-   {
-      _launchTime = Time.time;
-   }
+    [SerializeField]
+    private float lifetimeInSec = 2f;
 
-   private void Update()
-   {
-      if (Time.time - _launchTime > lifetimeInSec)
-      {
-         Destroy(gameObject);
-         return;
-      }
 
-      Move();
-   }
+    private float _launchTime;
 
-   private void Move()
-   {
-      transform.position += transform.forward * speed * Time.deltaTime;
-   }
+    private void Start()
+    {
+        _launchTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if (Time.time - _launchTime > lifetimeInSec)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Move();
+    }
+
+    private void Move()
+    {
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
 }

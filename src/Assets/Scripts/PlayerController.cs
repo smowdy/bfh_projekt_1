@@ -14,7 +14,8 @@ public class PlayerController : SpaceShipController
         Turn(Input.GetAxis("Horizontal"));
     }
 
-    private void Thrust() {
+    private void Thrust()
+    {
         Thrust(Input.GetAxis("Vertical"));
     }
 }

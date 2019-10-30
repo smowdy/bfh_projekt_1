@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DestructibleObjectController : MonoBehaviour
 {
-    [SerializeField] protected float maxHealthpoints = 100f;
+    [SerializeField] 
+    protected float maxHealthpoints = 100f;
 
 }
