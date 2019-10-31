@@ -18,7 +18,7 @@ public class ProjectileController : MonoBehaviour
 
     private void Start()
     {
-        _launchTime = Time.time;
+        launchTime = Time.time;
     }
 
     private void Update()
