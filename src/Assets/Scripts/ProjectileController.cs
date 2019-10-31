@@ -23,7 +23,7 @@ public class ProjectileController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time - _launchTime > lifetimeInSec)
+        if (Time.time - launchTime > lifetimeInSec)
         {
             Destroy(gameObject);
             return;
