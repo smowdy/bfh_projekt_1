@@ -14,7 +14,7 @@ public class ProjectileController : MonoBehaviour
     private float lifetimeInSec = 2f;
 
 
-    private float _launchTime;
+    private float launchTime;
 
     private void Start()
     {
