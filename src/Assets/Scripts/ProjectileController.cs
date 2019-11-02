@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private float speed = 50f;
+
+    [SerializeField]
+    private float damage = 10f;
+
+    [SerializeField]
+    private float lifetimeInSec = 2f;
+
+
+    private float launchTime;
+
+    private void Start()
     {
-        
+        launchTime = Time.time;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Time.time - launchTime > lifetimeInSec)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Move();
+    }
+
+    private void Move()
+    {
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 }
