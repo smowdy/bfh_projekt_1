@@ -35,10 +35,8 @@ public class ProjectileController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-        Debug.Log("HIT");
         if(other.gameObject.name == "Enemy")
         {
-            Debug.Log("ENEMYDAMAGE");
              other.gameObject.GetComponent<EnemyController>().TakesDamage(20);
         }
     }
