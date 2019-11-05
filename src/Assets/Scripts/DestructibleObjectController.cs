@@ -9,18 +9,16 @@ public class DestructibleObjectController : MonoBehaviour
 
     public void TakesDamage(int amount)
     {
-        maxHealthpoints -= amount; 
+
+        maxHealthpoints -= amount;
+        Debug.Log(maxHealthpoints);
     }
 
-    private void Update()
-    {
-        CheckIfDestroyed();
-    }
-
-    private void CheckIfDestroyed()
+    public void CheckIfDestroyed()
     {
         if(maxHealthpoints <= 0)
         {
+            Debug.Log("DESTOYED");
             Destroy(gameObject);
         }
     }

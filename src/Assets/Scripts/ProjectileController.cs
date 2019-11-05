@@ -32,16 +32,15 @@ public class ProjectileController : MonoBehaviour
         Move();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-        Destroy(other.gameObject);
+        Debug.Log("HIT");
+        if(other.gameObject.name == "Enemy")
+        {
+            Debug.Log("ENEMYDAMAGE");
+             other.gameObject.GetComponent<EnemyController>().TakesDamage(20);
+        }
     }
 
     private void Move()

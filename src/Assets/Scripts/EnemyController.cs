@@ -15,6 +15,7 @@ public class EnemyController : SpaceShipController
     {
         Turn();
         Thrust();
+        base.CheckIfDestroyed();
     }
 
     private void Turn()
