@@ -32,6 +32,18 @@ public class ProjectileController : MonoBehaviour
         Move();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+        Destroy(collision.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        Destroy(other.gameObject);
+    }
+
     private void Move()
     {
         transform.position += transform.forward * speed * Time.deltaTime;

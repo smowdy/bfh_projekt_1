@@ -7,6 +7,7 @@ public class PlayerController : SpaceShipController
     {
         Turn();
         Thrust();
+        
     }
 
     private void Turn()
@@ -17,5 +18,12 @@ public class PlayerController : SpaceShipController
     private void Thrust()
     {
         Thrust(Input.GetAxis("Vertical"));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("TRIGGER2D");
+        Destroy(collision.gameObject);
+        
     }
 }
