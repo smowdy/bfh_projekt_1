@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 175419245084844064}
   - component: {fileID: 175419245084844071}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: ProjectileEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +108,4 @@ MonoBehaviour:
   speed: 50
   damage: 10
   lifetimeInSec: 2
+  shotBy: enemy
