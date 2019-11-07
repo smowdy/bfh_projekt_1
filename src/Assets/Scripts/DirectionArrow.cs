@@ -11,8 +11,9 @@ public class DirectionArrow : MonoBehaviour
     void Update()
     {
         Vector3 targetPosition = target.transform.position;
-        targetPosition.y = transform.position.y;
+        targetPosition.z = transform.position.z;
         transform.LookAt(targetPosition);
+        
         Debug.Log(targetPosition);
     }
 }

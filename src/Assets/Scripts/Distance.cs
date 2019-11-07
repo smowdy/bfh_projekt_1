@@ -14,6 +14,6 @@ public class Distance : MonoBehaviour
     void Update()
     {
         dist = Vector3.Distance(target.transform.position, player.transform.position);
-        distanceToTarget.text = "Distance to target: " + dist.ToString("F1") + "meters";
+        distanceToTarget.text = "Distance to target: " + dist.ToString("F1") + " meters";
     }
 }
