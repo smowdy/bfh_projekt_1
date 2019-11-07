@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class EnemyWeaponController : WeaponController
 {
-
+    // Update is called once per frame
+    void Update()
+    {
+        TryShoot("enemy");
+    }
 }

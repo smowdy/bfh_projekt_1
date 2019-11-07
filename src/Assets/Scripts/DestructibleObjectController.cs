@@ -8,6 +8,11 @@ public class DestructibleObjectController : MonoBehaviour
     protected float maxHealthpoints = 100f;
     private float currentHealtpoints;
 
+    public float GetCurrentHealthpointsNormalized()
+    {
+        return currentHealtpoints / maxHealthpoints;
+    }
+
     private void Awake()
     {
         currentHealtpoints = maxHealthpoints;
