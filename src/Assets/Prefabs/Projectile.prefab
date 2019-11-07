@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 175419245084844066}
   - component: {fileID: 175419245084844065}
   - component: {fileID: 175419245084844064}
-  - component: {fileID: 175419245084844071}
+  - component: {fileID: 2750684341920832426}
   m_Layer: 0
-  m_Name: ProjectileEnemy
+  m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &175419245084844071
+--- !u!114 &2750684341920832426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,6 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  damage: 10
+  damage: 20
   lifetimeInSec: 2
-  shotBy: enemy
+  shotBy: 

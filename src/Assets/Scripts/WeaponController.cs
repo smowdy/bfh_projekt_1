@@ -61,13 +61,14 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    protected void TryShoot()
+    protected void TryShoot(string shotBy)
     {
         if (!CanShoot()) { return; }
 
         nextShotAt = Time.time + 1 / shotsPerSecond;
         Transform spawn = GetNextProjectileSpawn();
-        Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
+        projectile.GetComponent<ProjectileController>().SetShotBy(shotBy);
     }
 
     private Quaternion GetLimitedRotation(Quaternion targetRotation)

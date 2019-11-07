@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4f3a76538a8f646bbea0c94472106f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 175419245084844070, guid: e723c8ecdebf42c488791d13f14d8c94,
+  projectilePrefab: {fileID: 175419245084844070, guid: 194c90fea2431a940a4b241bf9e46045,
     type: 3}
   projectileSpawns:
   - {fileID: 1340539560}

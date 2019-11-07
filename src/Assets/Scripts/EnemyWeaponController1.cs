@@ -7,6 +7,6 @@ public class EnemyWeaponController1 : WeaponController
     // Update is called once per frame
     void Update()
     {
-        TryShoot();
+        TryShoot("enemy");
     }
 }

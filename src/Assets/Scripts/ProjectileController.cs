@@ -13,8 +13,12 @@ public class ProjectileController : MonoBehaviour
     [SerializeField]
     private float lifetimeInSec = 2f;
 
-    [SerializeField]
     private string shotBy;
+
+    public void SetShotBy(string shotBy)
+    {
+        this.shotBy = shotBy;
+    }
 
 
     private float launchTime;

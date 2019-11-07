@@ -24,6 +24,6 @@ public class PlayerWeaponController : WeaponController
     private void HandleShootInput()
     {
         if (!(Input.GetAxis("Fire1") > 0)) { return; }
-        TryShoot();
+        TryShoot("player");
     }
 }
