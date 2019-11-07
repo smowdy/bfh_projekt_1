@@ -37,7 +37,7 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name != shotBy)
+        if (other.gameObject.tag != shotBy)
         {
             Destroy(gameObject);
             other.gameObject.GetComponent<DestructibleObjectController>().TakesDamage(damage);

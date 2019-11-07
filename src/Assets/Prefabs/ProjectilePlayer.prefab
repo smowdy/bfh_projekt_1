@@ -108,4 +108,4 @@ MonoBehaviour:
   speed: 50
   damage: 10
   lifetimeInSec: 2
-  shotBy: Player
+  shotBy: player
