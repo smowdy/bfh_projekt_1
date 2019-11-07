@@ -13,6 +13,9 @@ public class ProjectileController : MonoBehaviour
     [SerializeField]
     private float lifetimeInSec = 2f;
 
+    [SerializeField]
+    private string shotBy;
+
 
     private float launchTime;
 
@@ -34,10 +37,10 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-        if(other.gameObject.tag != "Player")
+        if (other.gameObject.name != shotBy)
         {
-             other.gameObject.GetComponent<EnemyController>().TakesDamage(damage);
+            Destroy(gameObject);
+            other.gameObject.GetComponent<DestructibleObjectController>().TakesDamage(damage);
         }
     }
 

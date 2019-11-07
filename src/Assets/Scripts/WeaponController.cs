@@ -66,7 +66,6 @@ public class WeaponController : MonoBehaviour
         if (!CanShoot()) { return; }
 
         nextShotAt = Time.time + 1 / shotsPerSecond;
-
         Transform spawn = GetNextProjectileSpawn();
         Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
     }
