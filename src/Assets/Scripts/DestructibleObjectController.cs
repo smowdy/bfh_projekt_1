@@ -6,19 +6,20 @@ public class DestructibleObjectController : MonoBehaviour
 {
     [SerializeField] 
     protected float maxHealthpoints = 100f;
-    protected float currentHealtpoints;
+    private float currentHealtpoints;
 
     private void Awake()
     {
         currentHealtpoints = maxHealthpoints;
     }
 
-    public void TakesDamage(int amount)
+    public void TakesDamage(float amount)
     {
         currentHealtpoints -= amount;
+        CheckIfDestroyed();
     }
 
-    public void CheckIfDestroyed()
+    private void CheckIfDestroyed()
     {
         if(currentHealtpoints <= 0)
         {
