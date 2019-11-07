@@ -8,7 +8,7 @@ public class ProjectileController : MonoBehaviour
     private float speed = 50f;
 
     [SerializeField]
-    private float damage = 10f;
+    private float damage = 20f;
 
     [SerializeField]
     private float lifetimeInSec = 2f;
@@ -30,6 +30,15 @@ public class ProjectileController : MonoBehaviour
         }
 
         Move();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        if(other.gameObject.tag != "Player")
+        {
+             other.gameObject.GetComponent<EnemyController>().TakesDamage(damage);
+        }
     }
 
     private void Move()
