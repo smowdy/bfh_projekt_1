@@ -51,8 +51,28 @@ public class SpaceShipController : DestructibleObjectController
 
     protected void Turn(float direction)
     {
-        float yaw = turnSpeed * Time.deltaTime * direction;
-        transform.Rotate(0, yaw, 0);
+        Quaternion targetRotation = Quaternion.Euler(
+            transform.rotation.eulerAngles.x,
+            transform.rotation.eulerAngles.y + direction * turnSpeed,
+            transform.rotation.eulerAngles.z
+        );
+        Turn(targetRotation);
+        //float yaw = turnSpeed * Time.deltaTime * direction;
+        //transform.Rotate(0, yaw, 0);
+    }
+
+    protected void Turn(Vector3 direction)
+    {
+        Turn(Quaternion.LookRotation(direction));
+    }
+
+    private void Turn(Quaternion targetRotation)
+    {
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            turnSpeed * Time.deltaTime
+        );
     }
 
     protected void Thrust(float direction)

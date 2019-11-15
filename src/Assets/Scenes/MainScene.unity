@@ -866,7 +866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthpoints: 500
   maxSpeed: 30
-  turnSpeed: 50
+  turnSpeed: 20
   acceleration: 20
 --- !u!4 &528282784
 Transform:
@@ -1188,7 +1188,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.5435787e+30, y: 1.3958761e+10, z: 8.0937406e+11,
+    w: 6.7406024e+22}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
