@@ -6,8 +6,9 @@ public class EnemyController : SpaceShipController
 {
     private float turnDirection = 1;
 
-    private void Start()
+    protected new void Start()
     {
+        base.Start();
         InvokeRepeating("SetRandomDirection", 0.1f, 3.0f);
     }
 

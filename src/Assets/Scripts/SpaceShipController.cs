@@ -6,15 +6,21 @@ public class SpaceShipController : DestructibleObjectController
 {
 
     [SerializeField]
-    protected float maxSpeed = 5f;
+    private float maxSpeed = 5f;
 
     [SerializeField]
-    protected float turnSpeed = 20f;
+    private float turnSpeed = 20f;
 
-    //private void Start()
-    //{
+    [SerializeField]
+    private float acceleration = 2f;
 
-    //}
+    private float velocity = 0f;
+    private Rigidbody rb;
+
+    protected void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
 
     //private void Update()
     //{
@@ -25,12 +31,23 @@ public class SpaceShipController : DestructibleObjectController
     //     * Recieving Inputs */
     //}
 
-    //private void FixedUpdate()
-    //{
-    //    /* Called every Physics step. 
-    //     * Intervals are consistent
-    //     * Use for adjusting physic (Rigidbody) objects. */
-    //}
+    protected void FixedUpdate()
+    {
+        /* Called every Physics step. 
+         * Intervals are consistent
+         * Use for adjusting physic (Rigidbody) objects. */
+        UpdateRigidBody();
+    }
+
+    private void UpdateRigidBody()
+    {
+        rb.velocity = transform.forward.normalized * Mathf.Clamp(velocity, -maxSpeed, maxSpeed);
+    }
+
+    private void AccelerateTo(float destSpeed)
+    {
+        velocity = Mathf.MoveTowards(velocity, destSpeed, acceleration * Time.fixedDeltaTime);
+    }
 
     protected void Turn(float direction)
     {
@@ -40,8 +57,6 @@ public class SpaceShipController : DestructibleObjectController
 
     protected void Thrust(float direction)
     {
-        transform.position += transform.forward * maxSpeed * Time.deltaTime * direction;
+        AccelerateTo(maxSpeed * direction);
     }
-
-
 }
