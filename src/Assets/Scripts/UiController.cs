@@ -18,7 +18,10 @@ public class UiController : MonoBehaviour
     public void Update()
     {
         SetCrosshairPosition();
-        SetHealthbarSize(PlayerController.GetCurrentHealthpointsNormalized());
+        if(PlayerController != null)
+        {
+            SetHealthbarSize(PlayerController.GetCurrentHealthpointsNormalized());
+        }
     }
 
     private void SetCrosshairPosition()

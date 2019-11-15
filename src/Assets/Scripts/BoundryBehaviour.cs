@@ -14,6 +14,11 @@ public class BoundryBehaviour : MonoBehaviour
 
     private void DamageObjectsOutsideBoundry()
     {
+        foreach (var removable in objectsOutsideBoundry.Where(x => x == null).ToArray())
+        {
+            objectsOutsideBoundry.Remove(removable);
+        }
+
         foreach (var destructible in objectsOutsideBoundry)
         {
             destructible.TakesDamage(1);
@@ -24,6 +29,7 @@ public class BoundryBehaviour : MonoBehaviour
     {
         var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
         if (destructible == null) { return; }
+
         objectsOutsideBoundry.Remove(destructible);
     }
 
@@ -34,7 +40,6 @@ public class BoundryBehaviour : MonoBehaviour
         {
             Destroy(other.gameObject);
             return;
-            
         }
 
         if (objectsOutsideBoundry.Any(x => x.Equals(destructible))) { return; }

@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(playerObject == null) { return; }
         Move();
         Rotate();
     }
