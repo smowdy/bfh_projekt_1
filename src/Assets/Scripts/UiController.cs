@@ -6,15 +6,14 @@ public class UiController : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject Crosshair;
+    private GameObject Crosshair = null;
 
     [SerializeField]
-    private GameObject Bar;
+    private GameObject Bar = null;
 
     [SerializeField]
-    private PlayerController PlayerController;
+    private PlayerController PlayerController = null;
 
-    // Update is called once per frame
     public void Update()
     {
         SetCrosshairPosition();

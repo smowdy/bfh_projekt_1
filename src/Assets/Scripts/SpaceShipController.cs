@@ -6,15 +6,21 @@ public class SpaceShipController : DestructibleObjectController
 {
 
     [SerializeField]
-    protected float maxSpeed = 5f;
+    private float maxSpeed = 5f;
 
     [SerializeField]
-    protected float turnSpeed = 20f;
+    private float turnSpeed = 20f;
 
-    //private void Start()
-    //{
+    [SerializeField]
+    private float acceleration = 2f;
 
-    //}
+    private float velocity = 0f;
+    private Rigidbody rb;
+
+    protected void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
 
     //private void Update()
     //{
@@ -25,23 +31,52 @@ public class SpaceShipController : DestructibleObjectController
     //     * Recieving Inputs */
     //}
 
-    //private void FixedUpdate()
-    //{
-    //    /* Called every Physics step. 
-    //     * Intervals are consistent
-    //     * Use for adjusting physic (Rigidbody) objects. */
-    //}
+    protected void FixedUpdate()
+    {
+        /* Called every Physics step. 
+         * Intervals are consistent
+         * Use for adjusting physic (Rigidbody) objects. */
+        UpdateRigidBody();
+    }
+
+    private void UpdateRigidBody()
+    {
+        rb.velocity = transform.forward.normalized * Mathf.Clamp(velocity, -maxSpeed, maxSpeed);
+    }
+
+    private void AccelerateTo(float destSpeed)
+    {
+        velocity = Mathf.MoveTowards(velocity, destSpeed, acceleration * Time.fixedDeltaTime);
+    }
 
     protected void Turn(float direction)
     {
-        float yaw = turnSpeed * Time.deltaTime * direction;
-        transform.Rotate(0, yaw, 0);
+        Quaternion targetRotation = Quaternion.Euler(
+            transform.rotation.eulerAngles.x,
+            transform.rotation.eulerAngles.y + direction * turnSpeed,
+            transform.rotation.eulerAngles.z
+        );
+        Turn(targetRotation);
+        //float yaw = turnSpeed * Time.deltaTime * direction;
+        //transform.Rotate(0, yaw, 0);
+    }
+
+    protected void Turn(Vector3 direction)
+    {
+        Turn(Quaternion.LookRotation(direction));
+    }
+
+    private void Turn(Quaternion targetRotation)
+    {
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            turnSpeed * Time.deltaTime
+        );
     }
 
     protected void Thrust(float direction)
     {
-        transform.position += transform.forward * maxSpeed * Time.deltaTime * direction;
+        AccelerateTo(maxSpeed * direction);
     }
-
-
 }
