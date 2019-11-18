@@ -31,4 +31,12 @@ public class DestructibleObjectController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
+        if (destructible == null) { return; }
+
+        destructible.TakesDamage(maxHealthpoints / 5);
+    }
 }

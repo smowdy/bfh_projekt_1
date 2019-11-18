@@ -36,11 +36,7 @@ public class BoundryBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
-        if(destructible == null)
-        {
-            Destroy(other.gameObject);
-            return;
-        }
+        if(destructible == null) { return; }
 
         if (objectsOutsideBoundry.Any(x => x.Equals(destructible))) { return; }
         objectsOutsideBoundry.Add(destructible);

@@ -5,13 +5,13 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject projectilePrefab;
+    private GameObject projectilePrefab = null;
 
     [SerializeField]
-    private Transform[] projectileSpawns;
+    private Transform[] projectileSpawns = { };
 
     [SerializeField]
-    private Transform parentTransform;
+    private Transform parentTransform = null;
 
     [SerializeField]
     private float shotsPerSecond = 10f;
