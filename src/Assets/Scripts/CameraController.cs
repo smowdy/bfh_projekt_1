@@ -13,12 +13,14 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerObject == null) { return; }
         Move(Time.fixedDeltaTime);
         
     }
 
     private void Update()
     {
+        if(playerObject == null) { return; }    
         Rotate(Time.deltaTime);
     }
 
