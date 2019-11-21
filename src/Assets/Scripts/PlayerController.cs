@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : SpaceShipController
 {
@@ -17,5 +19,10 @@ public class PlayerController : SpaceShipController
     private void Thrust()
     {
         Thrust(Input.GetAxis("Vertical"));
+    }
+
+    public override void DestroyThisObject()
+    {
+        SceneManager.LoadScene("GameOverScene");
     }
 }

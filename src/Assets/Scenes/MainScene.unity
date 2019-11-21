@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccfad48003d5204b994eaeab7501a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthpoints: 500
+  maxHealthpoints: 100
   maxSpeed: 30
   turnSpeed: 10
   acceleration: 10
