@@ -11,11 +11,16 @@ public class EnemyWeaponController : WeaponController
 
     void Update()
     {
+        AimAndTryShoot();        
+    }
+
+    private void AimAndTryShoot()
+    {
         if(Vector3.Distance(transform.position, target.position) <= 10)
         {
-Aim((target.position - transform.position).normalized);
-        TryShoot("enemy");
+            Aim((target.position - transform.position).normalized);
+            TryShoot("enemy");
         }
-        
     }
+
 }
