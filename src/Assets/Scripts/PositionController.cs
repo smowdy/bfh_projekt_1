@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionController : MonoBehaviour
-
-    
 {
     [SerializeField]
     RectTransform parent;
-    // Start is called before the first frame update
     void Start()
     {
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
