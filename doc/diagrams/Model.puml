@@ -1,38 +1,69 @@
 @startuml
 
-package "Unity Objects" <<Rectangle>> {
+package "Unity Scenes" <<Rectangle>>{
     hide members
+    Class MainScene
+}
+
+package "Unity GameObjects" <<Rectangle>> {
+    hide members
+    Class Weapon
     Class Player
     Class Enemy
-    Class Weapon
+    Class Projectile
     Class Asteroid
     Class Objective
     Class UI
 }
 
 package "Behaviours and Controllers" <<Rectangle>> {
-    hide members
+    hide methods
     abstract Class MonoBehaviour
-    Class SpaceShip
+    Class DestructibleObjectController{
+        - int MaxHealthpoints
+        - int Healthpoints
+    }
+    Class SpaceShipController{
+        - float MaxSpeed
+        - float TurnSpeed
+    }
     Class PlayerController
     Class EnemyController
-    Class WeaponController
+    Class WeaponController{
+        - GameObject ProjectilePrefab
+    }
+    Class ProjectileController{
+        - float Damage
+        - float Speed
+    }
     Class ObjectiveController
     Class UiController
 }
 
-PlayerController -up-|> SpaceShip
-EnemyController -up-|> SpaceShip
-SpaceShip -up-|> MonoBehaviour
-SpaceShip -right- WeaponController
+PlayerController -up-|> SpaceShipController
+EnemyController -up-|> SpaceShipController
+SpaceShipController -up-|> DestructibleObjectController
 ObjectiveController -up-|> MonoBehaviour
 WeaponController -up-|> MonoBehaviour
+ProjectileController -up-|> MonoBehaviour
 UiController -up-|> MonoBehaviour
+DestructibleObjectController -up-|> MonoBehaviour
 
+Asteroid *-up- DestructibleObjectController
 Player *-up- PlayerController
 Enemy *-up- EnemyController
 Weapon *-up- WeaponController
+Projectile *-up- ProjectileController
+WeaponController *-up- Projectile
 Objective *-up- ObjectiveController
 UI *-up- UiController
+
+MainScene -up- "1" Player
+MainScene -up- "0...n" Enemy
+MainScene -up- "0...n" Weapon
+MainScene -up- "0...n" Projectile
+MainScene -up- "0...n" Asteroid
+MainScene -up- "1" Objective
+MainScene -up- "1" UI
 
 @enduml

@@ -3,33 +3,33 @@ left to right direction
 Actor System
 Actor Player
 
-(Level starten)
-(Spielwelt dynamisch generieren)
-(mit Waffen zielen)..>(Level starten):include
-(mit Waffen feuern)..>(Level starten):include
-(Fähigkeiten einsetzen)..>(Level starten):include
-(Feindeinheiten bekämpfen)..>(Level starten):include
-(Verbesserungen kauffen)..>(Level starten):include
-(Raumschiff bewegen)
-(Raumschiff bewegen).>(Level starten):include
-(Ziel erreichen)..>(Raumschiff bewegen):include
-(Asteroiden ausweichen)..>(Raumschiff bewegen):include
-(Richtung einsehen).>(Ziel erreichen):extends
-(Feindeinheiten bekämpfen)..>(mit Waffen zielen):include
-(Feindeinheiten bekämpfen)..>(mit Waffen feuern):include
-(Raumschiff nimmt Schaden)<.(Kann zersört werden):extends
-(Asteroiden ausweichen)<..(Raumschiff nimmt Schaden):extends
-(Feindeinheiten bekämpfen)<..(Raumschiff nimmt Schaden):extends
-(Feinde nehmen Schaden).>(Feindeinheiten bekämpfen):include
-(Feinde hinterlassen Währung).>(Feindeinheiten bekämpfen):include
+(UC2.1 Level starten)
+(UC2.6 Spielwelt dynamisch generieren lassen)
+(UC1.2 mit Waffen zielen)..>(UC2.1 Level starten):include
+(UC1.3 mit Waffen feuern)..>(UC2.1 Level starten):include
+(UC1.4 Fähigkeiten einsetzen)..>(UC2.1 Level starten):include
+(UC2.4 Feindeinheiten bekämpfen)..>(UC2.1 Level starten):include
+(UC4.2 Verbesserungen kauffen)..>(UC2.1 Level starten):include
+(UC1.1 Raumschiff bewegen)
+(UC1.1 Raumschiff bewegen).>(UC2.1 Level starten):include
+(UC2.2 Ziel erreichen)..>(UC1.1 Raumschiff bewegen):include
+(UC2.3 Asteroiden ausweichen)..>(UC1.1 Raumschiff bewegen):include
+(UC3.3 Richtung einsehen).>(UC2.2 Ziel erreichen):extends
+(UC2.4 Feindeinheiten bekämpfen)..>(UC1.2 mit Waffen zielen):include
+(UC2.4 Feindeinheiten bekämpfen)..>(UC1.3 mit Waffen feuern):include
+(UC3.1 Raumschiff nimmt Schaden)<.(UC2.5 Kann zersört werden):extends
+(UC2.3 Asteroiden ausweichen)<..(UC3.1 Raumschiff nimmt Schaden):extends
+(UC2.4 Feindeinheiten bekämpfen)<..(UC3.1 Raumschiff nimmt Schaden):extends
+(UC3.2 Feinde nehmen Schaden).>(UC2.4 Feindeinheiten bekämpfen):include
+(UC4.1 Feinde hinterlassen Währung).>(UC2.4 Feindeinheiten bekämpfen):include
 
-Player -- (Feindeinheiten bekämpfen)
-Player -- (Asteroiden ausweichen)
-Player -- (Ziel erreichen)
-Player -- (Fähigkeiten einsetzen)
-Player -- (Spielwelt dynamisch generieren)
-Player -- (Verbesserungen kauffen)
+Player -- (UC2.4 Feindeinheiten bekämpfen)
+Player -- (UC2.3 Asteroiden ausweichen)
+Player -- (UC2.2 Ziel erreichen)
+Player -- (UC1.4 Fähigkeiten einsetzen)
+Player -- (UC2.6 Spielwelt dynamisch generieren lassen)
+Player -- (UC4.2 Verbesserungen kauffen)
 
-(Level starten) -- System
+(UC2.1 Level starten) -- System
 
 @enduml
