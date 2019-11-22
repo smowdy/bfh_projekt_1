@@ -43,8 +43,12 @@ public class ProjectileController : MonoBehaviour
     {
         if (other.gameObject.tag != shotBy)
         {
-            Destroy(gameObject);
-            other.gameObject.GetComponent<DestructibleObjectController>().TakesDamage(damage);
+            var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
+            if(destructible != null)
+            {
+                Destroy(gameObject);
+                destructible.TakesDamage(damage);
+            }
         }
     }
 

@@ -5,8 +5,22 @@ using UnityEngine;
 public class EnemyWeaponController : WeaponController
 {
     // Update is called once per frame
+
+    [SerializeField]
+    private Transform target;
+
     void Update()
     {
-        TryShoot("enemy");
+        AimAndTryShoot();        
     }
+
+    private void AimAndTryShoot()
+    {
+        if(Vector3.Distance(transform.position, target.position) <= 10)
+        {
+            Aim((target.position - transform.position).normalized);
+            TryShoot("enemy");
+        }
+    }
+
 }

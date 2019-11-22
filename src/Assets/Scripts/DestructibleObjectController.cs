@@ -10,7 +10,15 @@ public class DestructibleObjectController : MonoBehaviour
 
     public float GetCurrentHealthpointsNormalized()
     {
-        return currentHealtpoints / maxHealthpoints;
+        if(currentHealtpoints > 0f)
+        {
+            return currentHealtpoints / maxHealthpoints;
+        }
+        else
+        {
+            return 0f;
+        }
+        
     }
 
     private void Awake()
@@ -28,7 +36,20 @@ public class DestructibleObjectController : MonoBehaviour
     {
         if(currentHealtpoints <= 0)
         {
-            Destroy(gameObject);
+            DestroyThisObject();
         }
+    }
+
+    public virtual void DestroyThisObject()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
+        if (destructible == null) { return; }
+
+        destructible.TakesDamage(maxHealthpoints / 5);
     }
 }
