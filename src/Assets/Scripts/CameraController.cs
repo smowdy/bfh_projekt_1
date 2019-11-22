@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         if(playerObject == null) { return; }    
-        Rotate(Time.deltaTime);
+        //Rotate(Time.deltaTime);
     }
 
     private void Move(float deltaTime)
