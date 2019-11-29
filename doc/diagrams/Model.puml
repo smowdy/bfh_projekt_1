@@ -3,7 +3,10 @@
 package "Unity Scenes" <<Rectangle>>{
     hide members
     Class MainScene
-}
+    Class MenuScene
+    Class GameOverScene
+    Class GameCompleteScene
+    }
 
 package "Unity GameObjects" <<Rectangle>> {
     hide members
@@ -12,39 +15,97 @@ package "Unity GameObjects" <<Rectangle>> {
     Class Enemy
     Class Projectile
     Class Asteroid
-    Class Objective
+    Class Goal
     Class UI
 }
 
 package "Behaviours and Controllers" <<Rectangle>> {
-    hide methods
-    abstract Class MonoBehaviour
+    abstract Class MonoBehaviour{
+    - void Start()
+    - void Awake()
+    - void Update()
+    }
     Class DestructibleObjectController{
-        - int MaxHealthpoints
-        - int Healthpoints
+        - int maxHealthpoints
+        - int currentHealtpoints
+        + void TakesDamage(float amount)
+        -  void CheckIfDestroyed()
+        + void DestroyThisObject()
+        - void OnTriggerEnter(Collider other)
     }
     Class SpaceShipController{
-        - float MaxSpeed
-        - float TurnSpeed
+        - float maxSpeed
+        - float turnSpeed
+        - float acceleration
+        - float velocity
+        - void AccelerateTo(float destSpeed)
+        - void Turn(float direction)
+        - void Turn(Vector3 direction)
+        - void Turn(Quaternion targetRotation)
+        - void Thrust(float direction)
     }
-    Class PlayerController
-    Class EnemyController
+    Class PlayerController{
+        - void Turn()
+        - void Thrust()
+    }
+    Class EnemyController{
+        - void SetRandomDirection()
+        - void Turn()
+        - void Thrust()
+    }
     Class WeaponController{
-        - GameObject ProjectilePrefab
+        - GameObject projectilePrefab
+        - Transform[] projectileSpawns
+        - Transform parentTransform
+        - float shotsPerSecond
+        - float turnDegreePerSecond
+        - float maxTurnDegree
+        - float maxAngleDeltaToShoot
+        - float nextShotAt
+        - int lastUsedProjectileSpawn
+        - Vector3 lastAimedDirection
+        - Quaternion initialRotation
+        - void Aim(Vector3 direction)
+        - void TryShoot(string shotBy)
+        - bool CanShoot()
+        - Transform GetNextProjectileSpawn()
+    }
+    Class EnemyWeaponController{
+        - Transform target
+        - void AimAndTryShoot()
+    }
+    Class PlayerWeaponController{
+        - void AimToCursorPosition()
+        - void HandleShootInput()
     }
     Class ProjectileController{
-        - float Damage
-        - float Speed
+        - float damage
+        - float speed
+        - float lifetimeInSec
+        - string shotBy
+        - float launchTime
+        - void OnTriggerEnter(Collider other)
+        - void Move()
     }
-    Class ObjectiveController
-    Class UiController
+    Class GoalController{
+        - void OnTriggerEnter(Collider other)
+    }
+    Class UiController{
+        -GameObject crosshair
+        -GameObject bar
+        -PlayerController playerController
+        -void SetCrosshairPosition()
+        -void SetHealthbarSize(float sizeNormalized)
+    }
 }
 
 PlayerController -up-|> SpaceShipController
 EnemyController -up-|> SpaceShipController
 SpaceShipController -up-|> DestructibleObjectController
-ObjectiveController -up-|> MonoBehaviour
+GoalController -up-|> MonoBehaviour
 WeaponController -up-|> MonoBehaviour
+EnemyWeaponController -up-|> WeaponController
+PlayerWeaponController -up-|> WeaponController
 ProjectileController -up-|> MonoBehaviour
 UiController -up-|> MonoBehaviour
 DestructibleObjectController -up-|> MonoBehaviour
@@ -55,7 +116,7 @@ Enemy *-up- EnemyController
 Weapon *-up- WeaponController
 Projectile *-up- ProjectileController
 WeaponController *-up- Projectile
-Objective *-up- ObjectiveController
+Goal *-up- GoalController
 UI *-up- UiController
 
 MainScene -up- "1" Player
@@ -63,7 +124,7 @@ MainScene -up- "0...n" Enemy
 MainScene -up- "0...n" Weapon
 MainScene -up- "0...n" Projectile
 MainScene -up- "0...n" Asteroid
-MainScene -up- "1" Objective
+MainScene -up- "1" Goal
 MainScene -up- "1" UI
 
 @enduml
