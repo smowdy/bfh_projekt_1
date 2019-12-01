@@ -26,6 +26,14 @@ public class DestructibleObjectController : MonoBehaviour
         currentHealtpoints = maxHealthpoints;
     }
 
+    protected void OnTriggerEnter(Collider other)
+    {
+        var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
+        if (destructible == null) { return; }
+
+        DamageOtherOnCollision(destructible);
+    }
+
     public void TakesDamage(float amount)
     {
         currentHealtpoints -= amount;
@@ -45,11 +53,8 @@ public class DestructibleObjectController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void DamageOtherOnCollision(DestructibleObjectController destructible)
     {
-        var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
-        if (destructible == null) { return; }
-
         destructible.TakesDamage(maxHealthpoints / 5);
     }
 }
