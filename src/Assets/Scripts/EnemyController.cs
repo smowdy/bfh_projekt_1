@@ -1,42 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyController : SpaceShipController
 {
-    private float turnDirection = 1;
+    [SerializeField]
+    private GameObject target;
+
+    private EnemyState state;
 
     protected new void Start()
     {
         base.Start();
-        InvokeRepeating("SetRandomDirection", 0.1f, 3.0f);
+        state = new EnemyIdleState(gameObject);
+        if(target == null)
+        {
+            target = GameObject.FindGameObjectsWithTag("player").FirstOrDefault();
+        }
     }
 
     private void Update()
     {
-        Turn();
-        Thrust();
-    }
-
-    private void Turn()
-    {
-        Turn(turnDirection);
-    }
-
-    private void Thrust()
-    {
-        Thrust(1);
-    }
-
-    private void SetRandomDirection()
-    {
-        if (Random.Range(-1, 1) >= 0)
-        {
-            turnDirection = 1;
-        }
-        else
-        {
-            turnDirection = -1;
-        }
+        state = state.Action(target);
     }
 }

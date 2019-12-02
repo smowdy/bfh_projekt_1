@@ -46,10 +46,10 @@ public class SpaceShipController : DestructibleObjectController
 
     private void AccelerateTo(float destSpeed)
     {
-        velocity = Mathf.MoveTowards(velocity, destSpeed, acceleration * Time.fixedDeltaTime);
+        velocity = Mathf.MoveTowards(velocity, destSpeed, acceleration * Time.deltaTime);
     }
 
-    protected void Turn(float direction)
+    public void Turn(float direction)
     {
         Quaternion targetRotation = Quaternion.Euler(
             transform.rotation.eulerAngles.x,
@@ -61,7 +61,7 @@ public class SpaceShipController : DestructibleObjectController
         //transform.Rotate(0, yaw, 0);
     }
 
-    protected void Turn(Vector3 direction)
+    public void Turn(Vector3 direction)
     {
         Turn(Quaternion.LookRotation(direction));
     }
@@ -75,7 +75,7 @@ public class SpaceShipController : DestructibleObjectController
         );
     }
 
-    protected void Thrust(float direction)
+    public void Thrust(float direction)
     {
         AccelerateTo(maxSpeed * direction);
     }
