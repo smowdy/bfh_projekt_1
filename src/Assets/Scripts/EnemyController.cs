@@ -8,12 +8,15 @@ public class EnemyController : SpaceShipController
     [SerializeField]
     private GameObject target;
 
+    [SerializeField]
+    private float engageDistance = 20;
+
     private EnemyState state;
 
     protected new void Start()
     {
         base.Start();
-        state = new EnemyIdleState(gameObject);
+        state = new EnemyIdleState(gameObject,  engageDistance);
         if(target == null)
         {
             target = GameObject.FindGameObjectsWithTag("player").FirstOrDefault();

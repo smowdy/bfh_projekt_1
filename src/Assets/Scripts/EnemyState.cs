@@ -2,13 +2,13 @@
 
 public abstract class EnemyState
 {
-    protected static float ENGAGE_DISTANCE = 20;
+    protected GameObject enemy;
+    protected float engageDistance;
 
-    protected GameObject Enemy;
-
-    public EnemyState(GameObject Enemy)
+    public EnemyState(GameObject Enemy, float engageDistance)
     {
-        this.Enemy = Enemy;
+        this.enemy = Enemy;
+        this.engageDistance = engageDistance;
     }
 
     public abstract EnemyState Action(GameObject target);

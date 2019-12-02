@@ -7,16 +7,15 @@ public class EnemyIdleState : EnemyState
     private float turnDirection = 1;
     private float nextDirectionUpdateAt = 0;
 
-    public EnemyIdleState(GameObject Enemy) : base(Enemy) {
+    public EnemyIdleState(GameObject enemy, float engageDistance) : base(enemy, engageDistance) {
         SetRandomDirection();
     }
 
     public override EnemyState Action(GameObject target)
     {
-        if((target.transform.position - Enemy.transform.position).magnitude < ENGAGE_DISTANCE)
+        if((target.transform.position - enemy.transform.position).magnitude < engageDistance)
         {
-            Debug.Log("Enemy Engage");
-            return new EnemyEngageState(Enemy);
+            return new EnemyEngageState(enemy, engageDistance);
         }
 
         if(Time.time >= nextDirectionUpdateAt)
@@ -24,8 +23,8 @@ public class EnemyIdleState : EnemyState
             SetRandomDirection();
         }
 
-        Enemy.GetComponent<EnemyController>().Turn(turnDirection);
-        Enemy.GetComponent<EnemyController>().Thrust(1);
+        enemy.GetComponent<EnemyController>().Turn(turnDirection);
+        enemy.GetComponent<EnemyController>().Thrust(1);
         return this;
     }
 
