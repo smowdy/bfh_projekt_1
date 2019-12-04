@@ -41,7 +41,6 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("entered collider " + other.name + " " + other.tag);
         if (other.gameObject.tag != shotBy)
         {
             var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
