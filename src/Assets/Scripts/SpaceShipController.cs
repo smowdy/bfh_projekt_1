@@ -39,6 +39,14 @@ public class SpaceShipController : DestructibleObjectController
         UpdateRigidBody();
     }
 
+    protected void OnTriggerStay(Collider other)
+    {
+        var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
+        if (destructible == null) { return; }
+
+        ResetVelocityOnCollision(other.transform);
+    }
+
     private void UpdateRigidBody()
     {
         rb.velocity = transform.forward.normalized * Mathf.Clamp(velocity, -maxSpeed, maxSpeed);
@@ -57,8 +65,6 @@ public class SpaceShipController : DestructibleObjectController
             transform.rotation.eulerAngles.z
         );
         Turn(targetRotation);
-        //float yaw = turnSpeed * Time.deltaTime * direction;
-        //transform.Rotate(0, yaw, 0);
     }
 
     public void Turn(Vector3 direction)
@@ -78,5 +84,16 @@ public class SpaceShipController : DestructibleObjectController
     public void Thrust(float direction)
     {
         AccelerateTo(maxSpeed * direction);
+    }
+
+    protected void ResetVelocityOnCollision(Transform other)
+    {
+        Vector3 collisionDirection = (other.position - transform.position).normalized;
+        if (Vector3.Angle(collisionDirection, transform.forward) < 20 ||
+           Vector3.Angle(collisionDirection, -transform.forward) < 20)
+        {
+            //resets when collision angle is in 40° cone forward or backwards
+            velocity = 0;
+        }
     }
 }
