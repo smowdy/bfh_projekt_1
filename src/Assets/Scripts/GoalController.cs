@@ -19,7 +19,6 @@ public class GoalController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("GameCompleteScene");
         if (other.gameObject.tag == "player") {
             SceneManager.LoadScene("GameCompleteScene");
         }

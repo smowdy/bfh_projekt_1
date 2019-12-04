@@ -43,6 +43,11 @@ public class DestructibleObjectController : MonoBehaviour
     public virtual void DestroyThisObject()
     {
         Destroy(gameObject);
+
+        DestructionAnimator animator = GetComponent<DestructionAnimator>();
+        if(animator == null) { return; }
+
+        animator.Play();
     }
 
     private void OnTriggerEnter(Collider other)
