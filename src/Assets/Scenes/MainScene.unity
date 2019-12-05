@@ -371,7 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9979c8e22206e574b8379722d98db150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 3328304078145896710, guid: 1c749997ddd054a4583fcf1cf2943961,
+    type: 3}
 --- !u!114 &283471713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f015896f7e77b4b9d283596865e751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefab: {fileID: 0}
+  asteroidPrefab: {fileID: 6856951634955073519, guid: 3da1d9f1395156f45aeb3914da8e4db3,
+    type: 3}
 --- !u!1 &335671868
 GameObject:
   m_ObjectHideFlags: 0
