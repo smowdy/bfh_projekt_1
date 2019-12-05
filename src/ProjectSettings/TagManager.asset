@@ -7,6 +7,9 @@ TagManager:
   - player
   - enemy
   - goal
+  - asteroid
+  - asteroid_spawnpoint
+  - enemy_spawnpoint
   layers:
   - Default
   - TransparentFX
