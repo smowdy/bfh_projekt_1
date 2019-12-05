@@ -3,33 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class EnemySpawner : MonoBehaviour
+
+public class AsteroidManager : MonoBehaviour
 {
-    int numberOfEnemies = 20;
-
-    int safetyDistance = 30;
-
-    public void SpawnEnemies(GameObject enemyPrefab)
+    public void Spawn(GameObject enemyPrefab, int amount, int safetyDistance)
     {
         int i = 0;
-        while (i < numberOfEnemies)
+        while (i < amount)
         {
             Vector3 spawnPos = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
-            if (IsValidSpawnPos(spawnPos))
+            if (IsValidSpawnPos(spawnPos, safetyDistance))
             {
                 Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
                 i++;
             }
-            
+
         }
     }
 
-    private bool IsValidSpawnPos(Vector3 spawnPos)
+    private bool IsValidSpawnPos(Vector3 spawnPos, int safetyDistance)
     {
-        return IsNotInReachOf(spawnPos, "player") || IsNotInReachOf(spawnPos, "goal");
+        return IsNotInReachOf(spawnPos, "player", safetyDistance) || IsNotInReachOf(spawnPos, "goal", safetyDistance);
     }
 
-    private bool IsNotInReachOf(Vector3 spawnPos, string tag)
+    private bool IsNotInReachOf(Vector3 spawnPos, string tag, int safetyDistance)
     {
         GameObject target = GameObject.FindGameObjectsWithTag(tag).FirstOrDefault();
         return Vector3.Distance(target.transform.position, spawnPos) >= safetyDistance;
