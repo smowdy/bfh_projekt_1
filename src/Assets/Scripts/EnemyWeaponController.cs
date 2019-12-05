@@ -35,7 +35,5 @@ public class EnemyWeaponController : WeaponController
             return false;
         }
         return true;
-        
     }
-
 }
