@@ -6,7 +6,7 @@ public class AsteroidController : MonoBehaviour
 {
     Vector3 rotationSpeed;
 
-    int minScaleChange = -2;
+    int minScaleChange = 0;
     int maxScaleChange = 2;
     void Start()
     {
