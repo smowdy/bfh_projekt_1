@@ -11,6 +11,10 @@ public class EnemyWeaponController : WeaponController
 
     void Update()
     {
+        if(!FindTarget())
+        {
+            return;
+        }
         AimAndTryShoot();        
     }
 
@@ -21,6 +25,17 @@ public class EnemyWeaponController : WeaponController
             Aim((target.position - transform.position).normalized);
             TryShoot("enemy");
         }
+    }
+
+    bool FindTarget()
+    {
+        if(target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("player").transform;
+            return false;
+        }
+        return true;
+        
     }
 
 }
