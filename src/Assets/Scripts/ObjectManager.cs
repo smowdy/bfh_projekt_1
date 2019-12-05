@@ -15,16 +15,27 @@ public class ObjectManager : MonoBehaviour
             Vector3 spawnPos = getSpawnPosition();
             if (IsValidSpawnPos(spawnPos, safetyDistance))
             {
-                Instantiate(gameObject, spawnPos, Quaternion.identity);
+                Spawn(gameObject, spawnPos);
                 i++;
             }
 
         }
     }
 
-    private void Spawn(GameObject gameObject, Vector3 spawnPos)
+    public void Spawn(GameObject gameObject, Vector3 spawnPos)
     {
         Instantiate(gameObject, spawnPos, Quaternion.identity);
+    }
+
+    public void Spawn(GameObject gameObject, string tag)
+    {
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject spawnPoint in spawnPoints)
+        {
+            Vector3 spawnPos = spawnPoint.transform.position;
+            Destroy(spawnPoint);
+            Spawn(gameObject, spawnPos);
+        }
     }
 
     private Vector3 getSpawnPosition()
