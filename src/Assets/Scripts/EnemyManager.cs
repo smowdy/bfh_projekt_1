@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidManager : ObjectManager
+public class EnemyManager : ObjectManager
 {
     [SerializeField]
-    GameObject asteroidPrefab;
+    GameObject enemyPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        SpawnRandom(asteroidPrefab, 10, 10);
+        SpawnRandom(enemyPrefab, 10, 10);
     }
 }
