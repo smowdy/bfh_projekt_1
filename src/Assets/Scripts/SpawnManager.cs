@@ -12,10 +12,16 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Spawn(asteroidPrefab, "asteroid_spawnpoint");
+        //Spawn directly at Spawnpoint
+        //Spawn(asteroidPrefab, "asteroid_spawnpoint");
         Spawn(enemyPrefab, "enemy_spawnpoint");
+
+        //Spawn Cluster at Spawnpoint
+        SpawnCluster(asteroidPrefab, "asteroid_spawnpoint", 3, 10, 20);
+
+        //Spawn random inside Boundry
         SpawnRandom(enemyPrefab, 5, 10);
-        SpawnRandom(asteroidPrefab, 5, 10);
+        SpawnRandom(asteroidPrefab, 3, 10);
     }
 
     int maxRange = 50;
@@ -27,6 +33,21 @@ public class SpawnManager : MonoBehaviour
         while (i < amount)
         {
             Vector3 spawnPos = getSpawnPosition();
+            if (IsValidSpawnPos(spawnPos, safetyDistance))
+            {
+                Spawn(gameObject, spawnPos);
+                i++;
+            }
+
+        }
+    }
+
+    public void SpawnRandom(GameObject gameObject, Vector3 center, int amount, int safetyDistance, int maxRange)
+    {
+        int i = 0;
+        while (i < amount)
+        {
+            Vector3 spawnPos = getSpawnPosition(center, maxRange);
             if (IsValidSpawnPos(spawnPos, safetyDistance))
             {
                 Spawn(gameObject, spawnPos);
@@ -52,9 +73,25 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void SpawnCluster(GameObject gameObject, string tag, int amount, int safetyDistance, int maxRange)
+    {
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject spawnPoint in spawnPoints)
+        {
+            Vector3 spawnPos = spawnPoint.transform.position;
+            Destroy(spawnPoint);
+            SpawnRandom(gameObject, spawnPos, amount, safetyDistance, maxRange);
+        }
+    }
+
     private Vector3 getSpawnPosition()
     {
         return new Vector3(Random.Range(-maxRange, maxRange), 0, Random.Range(-maxRange, maxRange));
+    }
+
+    private Vector3 getSpawnPosition(Vector3 center, int maxRange)
+    {
+        return center + new Vector3(Random.Range(-maxRange, maxRange), 0, Random.Range(-maxRange, maxRange));
     }
 
     private bool IsValidSpawnPos(Vector3 spawnPos, int safetyDistance)
