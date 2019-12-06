@@ -39,6 +39,14 @@ public class SpaceShipController : DestructibleObjectController
         UpdateRigidBody();
     }
 
+    protected void OnTriggerStay(Collider other)
+    {
+        var destructible = other.gameObject.GetComponent<DestructibleObjectController>();
+        if (destructible == null) { return; }
+
+        ResetVelocityOnCollision(other.transform);
+    }
+
     private void UpdateRigidBody()
     {
         rb.velocity = transform.forward.normalized * Mathf.Clamp(velocity, -maxSpeed, maxSpeed);
@@ -46,10 +54,10 @@ public class SpaceShipController : DestructibleObjectController
 
     private void AccelerateTo(float destSpeed)
     {
-        velocity = Mathf.MoveTowards(velocity, destSpeed, acceleration * Time.fixedDeltaTime);
+        velocity = Mathf.MoveTowards(velocity, destSpeed, acceleration * Time.deltaTime);
     }
 
-    protected void Turn(float direction)
+    public void Turn(float direction)
     {
         Quaternion targetRotation = Quaternion.Euler(
             transform.rotation.eulerAngles.x,
@@ -57,11 +65,9 @@ public class SpaceShipController : DestructibleObjectController
             transform.rotation.eulerAngles.z
         );
         Turn(targetRotation);
-        //float yaw = turnSpeed * Time.deltaTime * direction;
-        //transform.Rotate(0, yaw, 0);
     }
 
-    protected void Turn(Vector3 direction)
+    public void Turn(Vector3 direction)
     {
         Turn(Quaternion.LookRotation(direction));
     }
@@ -75,8 +81,19 @@ public class SpaceShipController : DestructibleObjectController
         );
     }
 
-    protected void Thrust(float direction)
+    public void Thrust(float direction)
     {
         AccelerateTo(maxSpeed * direction);
+    }
+
+    protected void ResetVelocityOnCollision(Transform other)
+    {
+        Vector3 collisionDirection = (other.position - transform.position).normalized;
+        if (Vector3.Angle(collisionDirection, transform.forward) < 20 ||
+           Vector3.Angle(collisionDirection, -transform.forward) < 20)
+        {
+            //resets when collision angle is in 40° cone forward or backwards
+            velocity = 0;
+        }
     }
 }
