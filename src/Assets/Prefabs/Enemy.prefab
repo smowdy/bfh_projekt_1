@@ -148,7 +148,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5
@@ -387,11 +387,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3328304077580501460}
     m_Modifications:
-    - target: {fileID: 3525494223013880228, guid: fdbc60e22036da3488a5cf80dc591273,
-        type: 3}
-      propertyPath: m_Name
-      value: Turret
-      objectReference: {fileID: 0}
     - target: {fileID: 3523898995551010478, guid: fdbc60e22036da3488a5cf80dc591273,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -446,6 +441,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525494223013880228, guid: fdbc60e22036da3488a5cf80dc591273,
+        type: 3}
+      propertyPath: m_Name
+      value: Turret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdbc60e22036da3488a5cf80dc591273, type: 3}
