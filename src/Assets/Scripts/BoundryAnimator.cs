@@ -11,7 +11,6 @@ public class BoundryAnimator: MonoBehaviour
     [SerializeField]
     private float spawnPositionOffset = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         if(particleSystemPrefab == null) { return; }

@@ -32,7 +32,7 @@ public class WeaponController : MonoBehaviour
     private Vector3 lastAimedDirection = Vector3.zero;
     private Quaternion initialRotation = Quaternion.identity;
 
-    private void Start()
+    protected void Start()
     {
         initialRotation = transform.localRotation;
     }
