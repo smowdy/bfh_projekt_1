@@ -14,25 +14,13 @@ public class CameraController : MonoBehaviour
     private void FixedUpdate()
     {
         if (playerObject == null) { return; }
+        //Player moves in FixedUpdate so Camera should move in FixedUpdate too
         Move(Time.fixedDeltaTime);
-        
-    }
-
-    private void Update()
-    {
-        if(playerObject == null) { return; }    
-        Rotate(Time.deltaTime);
     }
 
     private void Move(float deltaTime)
     {
         Vector3 targetPosition = new Vector3(playerObject.position.x, transform.position.y, playerObject.position.z);
         transform.position = Vector3.Slerp(transform.position, targetPosition, cameraSpeed * deltaTime);
-    }
-
-    private void Rotate(float deltaTime)
-    {
-        Quaternion targetRotation = Quaternion.LookRotation(-playerObject.transform.up, playerObject.transform.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, cameraSpeed * Time.deltaTime);
     }
 }
