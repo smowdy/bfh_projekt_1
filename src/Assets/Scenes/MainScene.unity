@@ -744,7 +744,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.0390625, y: 0.1015625, z: 0.02734375, w: -0.03125}
+  m_BoundingSphereOverride: {x: 3.8205e-41, y: 5.38e-43, z: 2.0089e-41, w: 3.59e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1341,7 +1341,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Crosshair: {fileID: 42127641}
   Bar: {fileID: 1237055950}
-  PlayerController: {fileID: 0}
+  PlayerController: {fileID: 1659730360}
+--- !u!114 &1659730360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5184020527978831754, guid: 4bea0a76a8929784a87866fee75aca6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1693448446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccfad48003d5204b994eaeab7501a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1687708796
 GameObject:
   m_ObjectHideFlags: 0
