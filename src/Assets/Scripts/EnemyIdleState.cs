@@ -9,7 +9,6 @@ public class EnemyIdleState : EnemyState
     private float detectionDistance = 10f;
     private float rayCastWidth = 3.5f;
 
-
     public EnemyIdleState(GameObject enemy, float engageDistance) : base(enemy, engageDistance) {
         SetRandomDirection();
     }
@@ -21,33 +20,7 @@ public class EnemyIdleState : EnemyState
             return new EnemyEngageState(enemy, engageDistance);
         }
 
-        RaycastHit hit;
-        Vector3 raycastOffset = Vector3.zero;
-        Vector3 leftDetectionRay = enemy.transform.position - enemy.transform.right * rayCastWidth;
-        Vector3 rightDetectionRay = enemy.transform.position + enemy.transform.right * rayCastWidth;
-
-        Debug.DrawRay(leftDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
-        Debug.DrawRay(rightDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
-
-        if(Physics.Raycast(leftDetectionRay, enemy.transform.forward, out hit, detectionDistance))
-        {
-            raycastOffset += Vector3.right;
-        }else if(Physics.Raycast(rightDetectionRay, enemy.transform.forward, out hit, detectionDistance))
-        {
-            raycastOffset -= Vector3.right;
-        }
-
-        if(raycastOffset == Vector3.left)
-        {
-            turnDirection = -1;
-        }
-        else if (raycastOffset == Vector3.right) 
-        {
-            turnDirection = 1;
-        }else if (Time.time >= nextDirectionUpdateAt)
-        {
-            SetRandomDirection();
-        }
+        SetTurnDiraction();
         
         enemy.GetComponent<EnemyController>().Turn(turnDirection);
         enemy.GetComponent<EnemyController>().Thrust(1);
@@ -66,5 +39,38 @@ public class EnemyIdleState : EnemyState
         }
 
         nextDirectionUpdateAt = Time.time + 3;
+    }
+
+    private void SetTurnDiraction()
+    {
+        RaycastHit hit;
+        Vector3 raycastOffset = Vector3.zero;
+        Vector3 leftDetectionRay = enemy.transform.position - enemy.transform.right * rayCastWidth;
+        Vector3 rightDetectionRay = enemy.transform.position + enemy.transform.right * rayCastWidth;
+
+        Debug.DrawRay(leftDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
+        Debug.DrawRay(rightDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
+
+        if (Physics.Raycast(leftDetectionRay, enemy.transform.forward, out hit, detectionDistance))
+        {
+            raycastOffset += Vector3.right;
+        }
+        else if (Physics.Raycast(rightDetectionRay, enemy.transform.forward, out hit, detectionDistance))
+        {
+            raycastOffset -= Vector3.right;
+        }
+
+        if (raycastOffset == Vector3.left)
+        {
+            turnDirection = -1;
+        }
+        else if (raycastOffset == Vector3.right)
+        {
+            turnDirection = 1;
+        }
+        else if (Time.time >= nextDirectionUpdateAt)
+        {
+            SetRandomDirection();
+        }
     }
 }
