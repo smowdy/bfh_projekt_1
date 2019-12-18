@@ -9,30 +9,70 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     GameObject enemyPrefab;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    string enemySpawnPointTag = "enemy_spawnpoint";
+
+    [SerializeField]
+    string asteroidSpawnPointTag = "asteroid_spawnpoint";
+
+    [SerializeField]
+    string enemyClusterPointTag = "enemy_clusterpoint";
+
+    [SerializeField]
+    int enemyAmountPerCluster = 3;
+
+    [SerializeField]
+    int enemySafeDistancePerCluster = 10;
+
+    [SerializeField]
+    int enemyMaxRangePerCluster = 20;
+
+    [SerializeField]
+    string asteroidClusterPointTag = "asteroid_clusterpoint";
+
+    [SerializeField]
+    int asteroidAmountPerCluster = 3;
+
+    [SerializeField]
+    int asteroidSafeDistancePerCluster = 10;
+
+    [SerializeField]
+    int asteroidMaxRangePerCluster = 20;
+
+    [SerializeField]
+    int enemyAmmountSpawnedArroundCenter = 5;
+
+    [SerializeField]
+    int asteroidAmmountSpawnedArroundCenter = 5;
+
+    [SerializeField]
+    int maxDistToSpawnRandomArroundCenter = 50;
+
+
+
     void Start()
     {
         //Spawn directly at Spawnpoint
-        //Spawn(asteroidPrefab, "asteroid_spawnpoint");
-        Spawn(enemyPrefab, "enemy_spawnpoint");
+        Spawn(asteroidPrefab, asteroidSpawnPointTag);
+        Spawn(enemyPrefab, enemySpawnPointTag);
 
         //Spawn Cluster at Spawnpoint
-        SpawnCluster(asteroidPrefab, "asteroid_spawnpoint", 3, 10, 20);
+        SpawnCluster(enemyPrefab, enemyClusterPointTag, enemyAmountPerCluster, enemySafeDistancePerCluster, enemyMaxRangePerCluster);
+        SpawnCluster(asteroidPrefab, asteroidClusterPointTag, asteroidAmountPerCluster, asteroidSafeDistancePerCluster, asteroidMaxRangePerCluster);
 
         //Spawn random inside Boundry
-        SpawnRandom(enemyPrefab, 5, 10);
-        SpawnRandom(asteroidPrefab, 3, 10);
+        SpawnRandom(enemyPrefab, enemyAmmountSpawnedArroundCenter, enemySafeDistancePerCluster, maxDistToSpawnRandomArroundCenter);
+        SpawnRandom(asteroidPrefab, asteroidAmmountSpawnedArroundCenter, asteroidSafeDistancePerCluster, maxDistToSpawnRandomArroundCenter);
     }
 
-    int maxRange = 50;
-
-    //Do not Spawn to many Objects in a small place because it will loop forever...
-    public void SpawnRandom(GameObject gameObject, int amount, int safetyDistance)
+    //Do not Spawn too many Objects in a small place because it will loop forever...
+    public void SpawnRandom(GameObject gameObject, int amount, int safetyDistance, int maxRange)
     {
         int i = 0;
         while (i < amount)
         {
-            Vector3 spawnPos = getSpawnPosition();
+            Vector3 spawnPos = getSpawnPosition(maxRange);
             if (IsValidSpawnPos(spawnPos, safetyDistance))
             {
                 Spawn(gameObject, spawnPos);
@@ -84,7 +124,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private Vector3 getSpawnPosition()
+    private Vector3 getSpawnPosition(int maxRange)
     {
         return new Vector3(Random.Range(-maxRange, maxRange), 0, Random.Range(-maxRange, maxRange));
     }
