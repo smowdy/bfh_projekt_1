@@ -6,6 +6,8 @@ public class EnemyIdleState : EnemyState
 
     private float turnDirection = 1;
     private float nextDirectionUpdateAt = 0;
+    private float detectionDistance = 10f;
+    private float rayCastWidth = 3.5f;
 
     public EnemyIdleState(GameObject enemy, float engageDistance) : base(enemy, engageDistance) {
         SetRandomDirection();
@@ -18,11 +20,8 @@ public class EnemyIdleState : EnemyState
             return new EnemyEngageState(enemy, engageDistance);
         }
 
-        if(Time.time >= nextDirectionUpdateAt)
-        {
-            SetRandomDirection();
-        }
-
+        SetTurnDirection();
+        
         enemy.GetComponent<EnemyController>().Turn(turnDirection);
         enemy.GetComponent<EnemyController>().Thrust(1);
         return this;
@@ -40,5 +39,27 @@ public class EnemyIdleState : EnemyState
         }
 
         nextDirectionUpdateAt = Time.time + 3;
+    }
+
+    private void SetTurnDirection()
+    {
+        Vector3 leftDetectionRay = enemy.transform.position - enemy.transform.right * rayCastWidth;
+        Vector3 rightDetectionRay = enemy.transform.position + enemy.transform.right * rayCastWidth;
+
+        Debug.DrawRay(leftDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
+        Debug.DrawRay(rightDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
+
+        if (Physics.Raycast(leftDetectionRay, enemy.transform.forward, detectionDistance))
+        {
+            turnDirection = 1;
+        }
+        else if (Physics.Raycast(rightDetectionRay, enemy.transform.forward, detectionDistance))
+        {
+            turnDirection = -1;
+        }
+        else if (Time.time >= nextDirectionUpdateAt)
+        {
+            SetRandomDirection();
+        }        
     }
 }
