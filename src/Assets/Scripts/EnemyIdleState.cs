@@ -43,7 +43,6 @@ public class EnemyIdleState : EnemyState
 
     private void SetTurnDirection()
     {
-        RaycastHit hit;
         Vector3 raycastOffset = Vector3.zero;
         Vector3 leftDetectionRay = enemy.transform.position - enemy.transform.right * rayCastWidth;
         Vector3 rightDetectionRay = enemy.transform.position + enemy.transform.right * rayCastWidth;
@@ -51,11 +50,11 @@ public class EnemyIdleState : EnemyState
         Debug.DrawRay(leftDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
         Debug.DrawRay(rightDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
 
-        if (Physics.Raycast(leftDetectionRay, enemy.transform.forward, out hit, detectionDistance))
+        if (Physics.Raycast(leftDetectionRay, enemy.transform.forward, detectionDistance))
         {
             raycastOffset += Vector3.right;
         }
-        else if (Physics.Raycast(rightDetectionRay, enemy.transform.forward, out hit, detectionDistance))
+        else if (Physics.Raycast(rightDetectionRay, enemy.transform.forward, detectionDistance))
         {
             raycastOffset -= Vector3.right;
         }
