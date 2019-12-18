@@ -1,13 +1,10 @@
-﻿using System.Timers;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyIdleState : EnemyState
 {
 
     private float turnDirection = 1;
     private float nextDirectionUpdateAt = 0;
-    private float detectionDistance = 10f;
-    private float rayCastWidth = 3.5f;
 
     public EnemyIdleState(GameObject enemy, float engageDistance) : base(enemy, engageDistance) {
         SetRandomDirection();
@@ -20,10 +17,12 @@ public class EnemyIdleState : EnemyState
             return new EnemyEngageState(enemy, engageDistance);
         }
 
-        SetTurnDirection();
-        
-        enemy.GetComponent<EnemyController>().Turn(turnDirection);
-        enemy.GetComponent<EnemyController>().Thrust(1);
+        EnemyController enemyController = enemy.GetComponent<EnemyController>();
+
+        SetTurnDirection(enemy.transform, enemyController);
+
+        enemyController.Turn(turnDirection);
+        enemyController.Thrust(1);
         return this;
     }
 
@@ -41,19 +40,19 @@ public class EnemyIdleState : EnemyState
         nextDirectionUpdateAt = Time.time + 3;
     }
 
-    private void SetTurnDirection()
+    private void SetTurnDirection(Transform enemyTransform, EnemyController enemyController)
     {
-        Vector3 leftDetectionRay = enemy.transform.position - enemy.transform.right * rayCastWidth;
-        Vector3 rightDetectionRay = enemy.transform.position + enemy.transform.right * rayCastWidth;
+        Vector3 leftDetectionRay = enemyTransform.position - enemyTransform.right * enemyController.ObstacleRayCastWidth;
+        Vector3 rightDetectionRay = enemyTransform.position + enemyTransform.right * enemyController.ObstacleRayCastWidth;
 
-        Debug.DrawRay(leftDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
-        Debug.DrawRay(rightDetectionRay, enemy.transform.forward * detectionDistance, Color.cyan);
+        Debug.DrawRay(leftDetectionRay, enemyTransform.forward * enemyController.ObstacleDetectionDistance, Color.cyan);
+        Debug.DrawRay(rightDetectionRay, enemyTransform.forward * enemyController.ObstacleDetectionDistance, Color.cyan);
 
-        if (Physics.Raycast(leftDetectionRay, enemy.transform.forward, detectionDistance))
+        if (Physics.Raycast(leftDetectionRay, enemyTransform.forward, enemyController.ObstacleDetectionDistance))
         {
             turnDirection = 1;
         }
-        else if (Physics.Raycast(rightDetectionRay, enemy.transform.forward, detectionDistance))
+        else if (Physics.Raycast(rightDetectionRay, enemyTransform.forward, enemyController.ObstacleDetectionDistance))
         {
             turnDirection = -1;
         }

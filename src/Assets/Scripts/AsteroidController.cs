@@ -17,14 +17,14 @@ public class AsteroidController : MonoBehaviour
     private int maxRotation = 360;
 
 
-    void Start()
+    private void Start()
     {
         int randomScaleChange = getRandomScaleChange();
         transform.localScale += new Vector3(randomScaleChange, randomScaleChange, randomScaleChange);
         rotationSpeed = new Vector3(getRotationAxysValue(), getRotationAxysValue(), getRotationAxysValue());
     }
     
-    void Update()
+    private void Update()
     {
         transform.Rotate(rotationSpeed);
     }

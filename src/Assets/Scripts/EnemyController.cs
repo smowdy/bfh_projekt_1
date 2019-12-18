@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class EnemyController : SpaceShipController
@@ -10,6 +8,20 @@ public class EnemyController : SpaceShipController
 
     [SerializeField]
     private float engageDistance = 20;
+
+    [SerializeField]
+    private float obstacleDetectionDistance = 10f;
+    public float ObstacleDetectionDistance
+    {
+        get { return obstacleDetectionDistance; }
+    }
+
+    [SerializeField]
+    private float obstacleRayCastWidth = 3.5f;
+    public float ObstacleRayCastWidth
+    {
+        get { return obstacleRayCastWidth; }
+    }
 
     private EnemyState state;
 
