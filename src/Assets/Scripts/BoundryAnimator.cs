@@ -11,7 +11,7 @@ public class BoundryAnimator: MonoBehaviour
     [SerializeField]
     private float spawnPositionOffset = 0f;
 
-    void Start()
+    private void Start()
     {
         if(particleSystemPrefab == null) { return; }
         SpawnForwardBorder();

@@ -68,7 +68,7 @@ public class WeaponController : MonoBehaviour
         nextShotAt = Time.time + 1 / shotsPerSecond;
         Transform spawn = GetNextProjectileSpawn();
         GameObject projectile = Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
-        projectile.GetComponent<ProjectileController>().SetShotBy(shotBy);
+        projectile.GetComponent<ProjectileController>().ShotBy = shotBy;
     }
 
     private Quaternion GetLimitedRotation(Quaternion targetRotation)

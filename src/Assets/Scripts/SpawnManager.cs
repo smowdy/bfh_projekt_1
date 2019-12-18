@@ -1,57 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject asteroidPrefab;
+    private GameObject asteroidPrefab = null;
 
     [SerializeField]
-    GameObject enemyPrefab;
+    private GameObject enemyPrefab = null;
 
     [SerializeField]
-    string enemySpawnPointTag = "enemy_spawnpoint";
+    private string enemySpawnPointTag = "enemy_spawnpoint";
 
     [SerializeField]
-    string asteroidSpawnPointTag = "asteroid_spawnpoint";
+    private string asteroidSpawnPointTag = "asteroid_spawnpoint";
 
     [SerializeField]
-    string enemyClusterPointTag = "enemy_clusterpoint";
+    private string enemyClusterPointTag = "enemy_clusterpoint";
 
     [SerializeField]
-    int enemyAmountPerCluster = 3;
+    private int enemyAmountPerCluster = 3;
 
     [SerializeField]
-    int enemySafeDistancePerCluster = 10;
+    private int enemySafeDistancePerCluster = 10;
 
     [SerializeField]
-    int enemyMaxRangePerCluster = 20;
+    private int enemyMaxRangePerCluster = 20;
 
     [SerializeField]
-    string asteroidClusterPointTag = "asteroid_clusterpoint";
+    private string asteroidClusterPointTag = "asteroid_clusterpoint";
 
     [SerializeField]
-    int asteroidAmountPerCluster = 3;
+    private int asteroidAmountPerCluster = 3;
 
     [SerializeField]
-    int asteroidSafeDistancePerCluster = 10;
+    private int asteroidSafeDistancePerCluster = 10;
 
     [SerializeField]
-    int asteroidMaxRangePerCluster = 20;
+    private int asteroidMaxRangePerCluster = 20;
 
     [SerializeField]
-    int enemyAmmountSpawnedArroundCenter = 5;
+    private int enemyAmmountSpawnedArroundCenter = 5;
 
     [SerializeField]
-    int asteroidAmmountSpawnedArroundCenter = 5;
+    private int asteroidAmmountSpawnedArroundCenter = 5;
 
     [SerializeField]
-    int maxDistToSpawnRandomArroundCenter = 50;
+    private int maxDistToSpawnRandomArroundCenter = 50;
 
 
 
-    void Start()
+    private void Start()
     {
         //Spawn directly at Spawnpoint
         Spawn(asteroidPrefab, asteroidSpawnPointTag);
@@ -99,6 +97,7 @@ public class SpawnManager : MonoBehaviour
 
     public void Spawn(GameObject gameObject, Vector3 spawnPos)
     {
+        if(gameObject == null) { return; }
         Instantiate(gameObject, spawnPos, Quaternion.identity);
     }
 
