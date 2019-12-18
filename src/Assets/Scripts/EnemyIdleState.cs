@@ -20,7 +20,7 @@ public class EnemyIdleState : EnemyState
             return new EnemyEngageState(enemy, engageDistance);
         }
 
-        SetTurnDiraction();
+        SetTurnDirection();
         
         enemy.GetComponent<EnemyController>().Turn(turnDirection);
         enemy.GetComponent<EnemyController>().Thrust(1);
@@ -41,7 +41,7 @@ public class EnemyIdleState : EnemyState
         nextDirectionUpdateAt = Time.time + 3;
     }
 
-    private void SetTurnDiraction()
+    private void SetTurnDirection()
     {
         RaycastHit hit;
         Vector3 raycastOffset = Vector3.zero;
