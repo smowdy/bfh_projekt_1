@@ -14,12 +14,10 @@ public class ProjectileController : MonoBehaviour
     private float lifetimeInSec = 2f;
 
     private string shotBy;
-
-    public void SetShotBy(string shotBy)
+    public string ShotBy
     {
-        this.shotBy = shotBy;
+        set { this.shotBy = value; }
     }
-
 
     private float launchTime;
 

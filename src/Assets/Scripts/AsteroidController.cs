@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
 {
-    Vector3 rotationSpeed;
+    private Vector3 rotationSpeed;
 
-    int minScaleChange = 0;
-    int maxScaleChange = 2;
-    void Start()
+    [SerializeField]
+    private int minScaleChange = 0;
+    [SerializeField]
+    private int maxScaleChange = 2;
+
+    [SerializeField]
+    private int minRotation = 0;
+    [SerializeField]
+    private int maxRotation = 360;
+
+
+    private void Start()
     {
         int randomScaleChange = getRandomScaleChange();
         transform.localScale += new Vector3(randomScaleChange, randomScaleChange, randomScaleChange);
         rotationSpeed = new Vector3(getRotationAxysValue(), getRotationAxysValue(), getRotationAxysValue());
     }
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         transform.Rotate(rotationSpeed);
     }
 
     private float getRotationAxysValue()
     {
-        return Random.Range(0, 360) * Time.deltaTime;
+        return Random.Range(minRotation, maxRotation) * Time.fixedDeltaTime;
     }
 
     private int getRandomScaleChange()

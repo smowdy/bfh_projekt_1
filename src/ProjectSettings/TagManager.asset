@@ -10,6 +10,8 @@ TagManager:
   - asteroid
   - asteroid_spawnpoint
   - enemy_spawnpoint
+  - enemy_clusterpoint
+  - asteroid_clusterpoint
   layers:
   - Default
   - TransparentFX

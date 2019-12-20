@@ -1,5 +1,4 @@
-﻿using System.Timers;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyIdleState : EnemyState
 {
@@ -18,13 +17,12 @@ public class EnemyIdleState : EnemyState
             return new EnemyEngageState(enemy, engageDistance);
         }
 
-        if(Time.time >= nextDirectionUpdateAt)
-        {
-            SetRandomDirection();
-        }
+        EnemyController enemyController = enemy.GetComponent<EnemyController>();
 
-        enemy.GetComponent<EnemyController>().Turn(turnDirection);
-        enemy.GetComponent<EnemyController>().Thrust(1);
+        SetTurnDirection(enemy.transform, enemyController);
+
+        enemyController.Turn(turnDirection);
+        enemyController.Thrust(1);
         return this;
     }
 
@@ -40,5 +38,27 @@ public class EnemyIdleState : EnemyState
         }
 
         nextDirectionUpdateAt = Time.time + 3;
+    }
+
+    private void SetTurnDirection(Transform enemyTransform, EnemyController enemyController)
+    {
+        Vector3 leftDetectionRay = enemyTransform.position - enemyTransform.right * enemyController.ObstacleRayCastWidth;
+        Vector3 rightDetectionRay = enemyTransform.position + enemyTransform.right * enemyController.ObstacleRayCastWidth;
+
+        Debug.DrawRay(leftDetectionRay, enemyTransform.forward * enemyController.ObstacleDetectionDistance, Color.cyan);
+        Debug.DrawRay(rightDetectionRay, enemyTransform.forward * enemyController.ObstacleDetectionDistance, Color.cyan);
+
+        if (Physics.Raycast(leftDetectionRay, enemyTransform.forward, enemyController.ObstacleDetectionDistance))
+        {
+            turnDirection = 1;
+        }
+        else if (Physics.Raycast(rightDetectionRay, enemyTransform.forward, enemyController.ObstacleDetectionDistance))
+        {
+            turnDirection = -1;
+        }
+        else if (Time.time >= nextDirectionUpdateAt)
+        {
+            SetRandomDirection();
+        }        
     }
 }

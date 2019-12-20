@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestructibleObjectController : MonoBehaviour
 {
     [SerializeField] 
     protected float maxHealthpoints = 100f;
+
     private float currentHealtpoints;
 
     public float GetCurrentHealthpointsNormalized()

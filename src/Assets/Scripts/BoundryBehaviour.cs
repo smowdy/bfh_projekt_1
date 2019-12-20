@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class BoundryBehaviour : MonoBehaviour
 {
+    [SerializeField]
+    float damagePerGameTick = 1;
+
     private List<DestructibleObjectController> objectsOutsideBoundry = new List<DestructibleObjectController>();
 
     private void FixedUpdate()
@@ -21,7 +23,7 @@ public class BoundryBehaviour : MonoBehaviour
 
         foreach (var destructible in objectsOutsideBoundry)
         {
-            destructible.TakesDamage(1);
+            destructible.TakesDamage(damagePerGameTick);
         }
     }
 

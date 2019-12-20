@@ -1,16 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class EnemyWeaponController : WeaponController
 {
-    // Update is called once per frame
+    [SerializeField]
+    private float engageDistance = 20;
 
-    private Transform target;
+    [SerializeField]
+    private Transform target = null;
 
     protected new void Start()
     {
+        base.Start();
         if (target == null)
         {
             GameObject targetObject = GameObject.FindGameObjectsWithTag("player").FirstOrDefault();
@@ -18,14 +19,14 @@ public class EnemyWeaponController : WeaponController
         }
     }
 
-    void Update()
+    private void Update()
     {
         AimAndTryShoot();        
     }
 
     private void AimAndTryShoot()
     {
-        if (Vector3.Distance(transform.position, target.position) <= 10)
+        if (Vector3.Distance(transform.position, target.position) <= engageDistance)
         {
             Aim((target.position - transform.position).normalized);
             TryShoot("enemy");
