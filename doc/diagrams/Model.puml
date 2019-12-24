@@ -62,12 +62,6 @@ package "Behaviours and Controllers" <<Rectangle>> {
         - float obstacleRayCastWidth
         - EnemyState state
     }
-    Class EnemyState {
-        - GameObject enemy
-        - float engageDistance
-        + EnemyState(GameObject Enemy, float engageDistance)
-        + EnemyState Action(GameObject target)
-    }
     Class WeaponController{
         - GameObject projectilePrefab
         - Transform[] projectileSpawns
@@ -145,17 +139,6 @@ package "Behaviours and Controllers" <<Rectangle>> {
         - bool IsValidSpawnPos(Vector3 spawnPos, int safetyDistance)
         - bool IsNotInReachOf(Vector3 spawnPos, string tag, int safetyDistance)
     }
-    Class EnemyIdleState{
-        - float turnDirection
-        - float nextDirectionUpdateAt
-        - void SetRandomDirection()
-        - void SetTurnDirection(Transform enemyTransform, EnemyController enemyController)
-    }
-    Class EnemyEngageState{
-        - float nextDirectionUpdateAt
-        - Vector3 currentDirection
-        - Vector3 GetDirection(Vector3 targetPosition)
-    }
     Class DestructionAnimator{
         - GameObject destructionParticleSystem
         + void Play()
@@ -182,6 +165,26 @@ package "Behaviours and Controllers" <<Rectangle>> {
         - void DamageObjectsOutsideBoundry()
         - void OnTriggerEnter(Collider other)
         - void OnTriggerExit(Collider other)
+    }
+}
+
+package "State" <<Rectangle>> {
+    Class EnemyState {
+        - GameObject enemy
+        - float engageDistance
+        + EnemyState(GameObject Enemy, float engageDistance)
+        + EnemyState Action(GameObject target)
+    }
+    Class EnemyIdleState{
+        - float turnDirection
+        - float nextDirectionUpdateAt
+        - void SetRandomDirection()
+        - void SetTurnDirection(Transform enemyTransform, EnemyController enemyController)
+    }
+    Class EnemyEngageState{
+        - float nextDirectionUpdateAt
+        - Vector3 currentDirection
+        - Vector3 GetDirection(Vector3 targetPosition)
     }
 }
 
