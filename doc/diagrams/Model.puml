@@ -206,6 +206,7 @@ AsteroidController -up-|> MonoBehaviour
 BoundryBehaviour -up-|> MonoBehaviour
 EnemyIdleState -up-|> EnemyState
 EnemyEngageState -up-|> EnemyState
+EnemyState -up-|> EnemyController
 
 Asteroid *-up- AsteroidController
 Player *-up- PlayerController
