@@ -1,5 +1,4 @@
 @startuml
-
 package "Unity Scenes" <<Rectangle>>{
     hide members
     Class MainScene
@@ -26,32 +25,42 @@ package "Behaviours and Controllers" <<Rectangle>> {
     - void Update()
     }
     Class DestructibleObjectController{
-        - int maxHealthpoints
-        - int currentHealtpoints
-        + void TakesDamage(float amount)
-        -  void CheckIfDestroyed()
-        + void DestroyThisObject()
+        - float maxHealthpoints
+        - float currentHealtpoints
+        + float GetCurrentHealthpointsNormalized()
         - void OnTriggerEnter(Collider other)
+        + void TakesDamage(float amount)
+        - void CheckIfDestroyed()
+        + void DestroyThisObject()
+        - void DamageOtherOnCollision(DestructibleObjectController destructible)
     }
     Class SpaceShipController{
         - float maxSpeed
         - float turnSpeed
         - float acceleration
         - float velocity
+        - Rigidbody rb
+        - void FixedUpdate()
+        - void OnTriggerStay(Collider other)
+        - void UpdateRigidBody()
         - void AccelerateTo(float destSpeed)
         - void Turn(float direction)
         - void Turn(Vector3 direction)
         - void Turn(Quaternion targetRotation)
         - void Thrust(float direction)
+        -void ResetVelocityOnCollision(Transform other)
     }
     Class PlayerController{
         - void Turn()
         - void Thrust()
+        - void DestroyThisObject()
     }
     Class EnemyController{
-        - void SetRandomDirection()
-        - void Turn()
-        - void Thrust()
+        - GameObject target
+        - float engageDistance
+        - float obstacleDetectionDistance
+        - float obstacleRayCastWidth
+        - EnemyState state
     }
     Class WeaponController{
         - GameObject projectilePrefab
@@ -67,10 +76,13 @@ package "Behaviours and Controllers" <<Rectangle>> {
         - Quaternion initialRotation
         - void Aim(Vector3 direction)
         - void TryShoot(string shotBy)
+        - Quaternion GetLimitedRotation(Quaternion targetRotation)
+        - Quaternion GetInitialRelativeRotation()
         - bool CanShoot()
         - Transform GetNextProjectileSpawn()
     }
     Class EnemyWeaponController{
+        - float engageDistance
         - Transform target
         - void AimAndTryShoot()
     }
@@ -79,8 +91,8 @@ package "Behaviours and Controllers" <<Rectangle>> {
         - void HandleShootInput()
     }
     Class ProjectileController{
-        - float damage
         - float speed
+        - float damage
         - float lifetimeInSec
         - string shotBy
         - float launchTime
@@ -97,6 +109,83 @@ package "Behaviours and Controllers" <<Rectangle>> {
         -void SetCrosshairPosition()
         -void SetHealthbarSize(float sizeNormalized)
     }
+    Class MainMenuController{
+        - string sceneNameToLoad
+        + void StartGameClicked()
+    }
+    Class SpawnManager{
+        - GameObject asteroidPrefab
+        - GameObject enemyPrefab
+        - string enemySpawnPointTag
+        - string asteroidSpawnPointTag
+        - string enemyClusterPointTag
+        - int enemyAmountPerCluster
+        - int enemySafeDistancePerCluster
+        - int enemyMaxRangePerCluster
+        - string asteroidClusterPointTag
+        - int asteroidAmountPerCluster
+        - int asteroidSafeDistancePerCluster
+        - int asteroidMaxRangePerCluster
+        - int enemyAmmountSpawnedArroundCenter
+        - int asteroidAmmountSpawnedArroundCenter
+        - int maxDistToSpawnRandomArroundCenter
+        + void SpawnRandom(GameObject gameObject, int amount, int safetyDistance, int maxRange)
+        + void SpawnRandom(GameObject gameObject, Vector3 center, int amount, int safetyDistance, int maxRange)
+        + void Spawn(GameObject gameObject, Vector3 spawnPos)
+        + void Spawn(GameObject gameObject, string tag)
+        + void SpawnCluster(GameObject gameObject, string tag, int amount, int safetyDistance, int maxRange)
+        - Vector3 getSpawnPosition(int maxRange)
+        - Vector3 getSpawnPosition(Vector3 center, int maxRange)
+        - bool IsValidSpawnPos(Vector3 spawnPos, int safetyDistance)
+        - bool IsNotInReachOf(Vector3 spawnPos, string tag, int safetyDistance)
+    }
+    Class DestructionAnimator{
+        - GameObject destructionParticleSystem
+        + void Play()
+    }
+    Class CameraController{
+        - Rigidbody playerObject
+        - float cameraSpeed
+        - void FixedUpdate()
+        - void Move(float deltaTime)
+    }
+    Class AsteroidController{
+        - Vector3 rotationSpeed
+        - int minScaleChange
+        - int maxScaleChange
+        - int minRotation
+        - int maxRotation
+        - float getRotationAxysValue()
+        - int getRandomScaleChange()
+    }
+    Class BoundryBehaviour{
+        - float damagePerGameTick
+        - List<DestructibleObjectController> objectsOutsideBoundry
+        - void FixedUpdate()
+        - void DamageObjectsOutsideBoundry()
+        - void OnTriggerEnter(Collider other)
+        - void OnTriggerExit(Collider other)
+    }
+}
+
+package "State" <<Rectangle>> {
+    Class EnemyState {
+        - GameObject enemy
+        - float engageDistance
+        + EnemyState(GameObject Enemy, float engageDistance)
+        + EnemyState Action(GameObject target)
+    }
+    Class EnemyIdleState{
+        - float turnDirection
+        - float nextDirectionUpdateAt
+        - void SetRandomDirection()
+        - void SetTurnDirection(Transform enemyTransform, EnemyController enemyController)
+    }
+    Class EnemyEngageState{
+        - float nextDirectionUpdateAt
+        - Vector3 currentDirection
+        - Vector3 GetDirection(Vector3 targetPosition)
+    }
 }
 
 PlayerController -up-|> SpaceShipController
@@ -109,8 +198,17 @@ PlayerWeaponController -up-|> WeaponController
 ProjectileController -up-|> MonoBehaviour
 UiController -up-|> MonoBehaviour
 DestructibleObjectController -up-|> MonoBehaviour
+MainMenuController -up-|> MonoBehaviour
+DestructionAnimator -up-|> MonoBehaviour
+SpawnManager -up-|> MonoBehaviour
+CameraController -up-|> MonoBehaviour
+AsteroidController -up-|> MonoBehaviour
+BoundryBehaviour -up-|> MonoBehaviour
+EnemyIdleState -up-|> EnemyState
+EnemyEngageState -up-|> EnemyState
+EnemyState -up-|> EnemyController
 
-Asteroid *-up- DestructibleObjectController
+Asteroid *-up- AsteroidController
 Player *-up- PlayerController
 Enemy *-up- EnemyController
 Weapon *-up- WeaponController
