@@ -12,7 +12,7 @@ public class EnemyIdleState : EnemyState
 
     public override EnemyState Action(GameObject target)
     {
-        if((target.transform.position - enemy.transform.position).magnitude < engageDistance)
+        if(Vector3.Distance(target.transform.position, enemy.transform.position) < engageDistance)
         {
             return new EnemyEngageState(enemy, engageDistance);
         }
