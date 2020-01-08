@@ -1,0 +1,45 @@
+@startuml
+
+node "MainCamera"{
+    node "BackgroundImage"
+    [CameraController]
+}
+
+node "Player"{
+    [PlayerController]
+    node "PlayerModel"
+    node "PlayerWeapon"{
+        [PlayerWeaponController]
+        node "TurretModel"
+    }
+}
+
+node "Enemy"{
+    [EnemyController]
+    node "EnemyModel"
+    node "EnemyWeapon"{
+        [EnemyWeaponController]
+        node "TurretModel"
+    }
+}
+
+node "AsteroidModel"{
+    [AsteroidController]
+}
+
+node "StationModel"{
+    [GoalController]
+}
+
+node "Boundry"{
+    [BoundryBehaviour]
+    [SpawnManager]
+}
+
+node "Canvas"{
+    node "Crosshair"
+    node "PlayerHealthBar"
+    [UiController]
+}
+
+@enduml
