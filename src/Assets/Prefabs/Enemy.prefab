@@ -264,11 +264,11 @@ MonoBehaviour:
   - {fileID: 2479073814639687042}
   - {fileID: 2479073814288852805}
   parentTransform: {fileID: 3328304078145896711}
-  shotsPerSecond: 3
+  shotsPerSecond: 5
   turnDegreePerSecond: 360
   maxTurnDegree: 360
   maxAngleDeltaToShoot: 5
-  engageDistance: 20
+  engageDistance: 35
   target: {fileID: 0}
 --- !u!1 &3328304078145896710
 GameObject:
@@ -321,11 +321,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthpoints: 100
-  maxSpeed: 5
-  turnSpeed: 10
-  acceleration: 2
-  target: {fileID: 5184020526971483510, guid: 4bea0a76a8929784a87866fee75aca6b, type: 3}
-  engageDistance: 20
+  maxSpeed: 10
+  turnSpeed: 180
+  acceleration: 30
+  target: {fileID: 0}
+  engageDistance: 50
+  obstacleDetectionDistance: 10
+  obstacleRayCastWidth: 3.5
 --- !u!54 &3328304078145896730
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -389,11 +391,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3328304077580501460}
     m_Modifications:
-    - target: {fileID: 3525494223013880228, guid: fdbc60e22036da3488a5cf80dc591273,
-        type: 3}
-      propertyPath: m_Name
-      value: Turret
-      objectReference: {fileID: 0}
     - target: {fileID: 3523898995551010478, guid: fdbc60e22036da3488a5cf80dc591273,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -448,6 +445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525494223013880228, guid: fdbc60e22036da3488a5cf80dc591273,
+        type: 3}
+      propertyPath: m_Name
+      value: Turret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdbc60e22036da3488a5cf80dc591273, type: 3}

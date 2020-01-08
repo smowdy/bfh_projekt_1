@@ -39,7 +39,7 @@ public class BoundryAnimator: MonoBehaviour
     private void SpawnRightBorder()
     {
         Vector3 position = transform.position +
-            transform.right * (transform.localScale.z / 2 + spawnPositionOffset);
+            transform.right * (transform.localScale.x / 2 + spawnPositionOffset);
         SpawnAsteroidBelt(
             position, 
             Quaternion.LookRotation(transform.forward), 
@@ -55,7 +55,7 @@ public class BoundryAnimator: MonoBehaviour
     private void SpawnLeftdBorder()
     {
         Vector3 position = transform.position +
-            -transform.right * (transform.localScale.z / 2 + spawnPositionOffset);
+            -transform.right * (transform.localScale.x / 2 + spawnPositionOffset);
         SpawnAsteroidBelt(
             position,
             Quaternion.LookRotation(transform.forward),
